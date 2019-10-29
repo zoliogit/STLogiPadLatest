@@ -1,0 +1,687 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8C2A691E235EDA48009DC731 /* orderDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2A691D235EDA48009DC731 /* orderDetailsViewController.m */; };
+		8C2BDE1623604A7500315956 /* icon152x152.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C2BDE1423604A7400315956 /* icon152x152.png */; };
+		8C2BDE1723604A7500315956 /* icon76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C2BDE1523604A7400315956 /* icon76x76.png */; };
+		8C2BDE1923604C9200315956 /* no-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C2BDE1823604C9200315956 /* no-image.png */; };
+		8C3075082358168B0001B242 /* ProductItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C3075072358168B0001B242 /* ProductItem.m */; };
+		8C3AA1E1236687300099712A /* buttonImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C3AA1E02366872E0099712A /* buttonImage.png */; };
+		8C3AA1E323669D890099712A /* buttonImageSelection.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C3AA1E223669D800099712A /* buttonImageSelection.png */; };
+		8C3AA1E6236731990099712A /* buttonImage185x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C3AA1E4236731980099712A /* buttonImage185x50.png */; };
+		8C3AA1E7236731990099712A /* buttonImageSelection185x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C3AA1E5236731990099712A /* buttonImageSelection185x50.png */; };
+		8C4B5CF6233D4A1900C968EB /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B5CF5233D4A1900C968EB /* OrderStatusViewController.m */; };
+		8C4B5CF9233D4CE800C968EB /* OrderStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B5CF8233D4CE800C968EB /* OrderStatusTableViewCell.m */; };
+		8C8619CD233FE8640067224B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8619CC233FE8640067224B /* AVFoundation.framework */; };
+		8C8D034A230F91AE00AD8AA6 /* logo_sthealthcare.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C8D0349230F91AD00AD8AA6 /* logo_sthealthcare.png */; };
+		8C8D034D2312807B00AD8AA6 /* ProductListPopOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D034C2312807B00AD8AA6 /* ProductListPopOverViewController.m */; };
+		8C8D0350231280E500AD8AA6 /* ProdDescViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D034F231280E500AD8AA6 /* ProdDescViewController.m */; };
+		8C8D03532312B70600AD8AA6 /* CartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D03522312B70600AD8AA6 /* CartViewController.m */; };
+		8CA3C9E423138BC0008B87D1 /* CartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3C9E323138BC0008B87D1 /* CartTableViewCell.m */; };
+		8CD5AF262355AF1B00B4279C /* DBHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5AF242355AF1800B4279C /* DBHandler.m */; };
+		8CD5AF282355B1A400B4279C /* ST.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5AF272355B1A400B4279C /* ST.sqlite */; };
+		8CD5AF2A2355B22300B4279C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD5AF292355B22300B4279C /* libsqlite3.tbd */; };
+		8CE49BA2233EA773004ECB48 /* checkBoxDeSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CE49BA0233EA773004ECB48 /* checkBoxDeSelect.png */; };
+		8CE49BA3233EA773004ECB48 /* checkBoxSelect.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CE49BA1233EA773004ECB48 /* checkBoxSelect.png */; };
+		8CE49BA6233EA7D8004ECB48 /* FavTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE49BA5233EA7D8004ECB48 /* FavTableViewCell.m */; };
+		8CF3BE132359B68100612D7C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF3BE122359B68000612D7C /* MessageUI.framework */; };
+		8CF91845230EEBFE003824A8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF91844230EEBFE003824A8 /* AppDelegate.m */; };
+		8CF91848230EEBFE003824A8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF91847230EEBFE003824A8 /* ViewController.m */; };
+		8CF9184B230EEBFE003824A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF91849230EEBFE003824A8 /* Main.storyboard */; };
+		8CF9184D230EEBFE003824A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CF9184C230EEBFE003824A8 /* Assets.xcassets */; };
+		8CF91850230EEBFE003824A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF9184E230EEBFE003824A8 /* LaunchScreen.storyboard */; };
+		8CF91853230EEBFE003824A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF91852230EEBFE003824A8 /* main.m */; };
+		8CF9185D230EEBFF003824A8 /* STLogiPadTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9185C230EEBFF003824A8 /* STLogiPadTests.m */; };
+		8CF91868230EEBFF003824A8 /* STLogiPadUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF91867230EEBFF003824A8 /* STLogiPadUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8CF91859230EEBFF003824A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8CF91838230EEBFE003824A8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CF9183F230EEBFE003824A8;
+			remoteInfo = STLogiPad;
+		};
+		8CF91864230EEBFF003824A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8CF91838230EEBFE003824A8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CF9183F230EEBFE003824A8;
+			remoteInfo = STLogiPad;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8C2A691C235EDA48009DC731 /* orderDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = orderDetailsViewController.h; sourceTree = "<group>"; };
+		8C2A691D235EDA48009DC731 /* orderDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = orderDetailsViewController.m; sourceTree = "<group>"; };
+		8C2BDE1423604A7400315956 /* icon152x152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon152x152.png; sourceTree = "<group>"; };
+		8C2BDE1523604A7400315956 /* icon76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon76x76.png; sourceTree = "<group>"; };
+		8C2BDE1823604C9200315956 /* no-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-image.png"; sourceTree = "<group>"; };
+		8C3075062358168B0001B242 /* ProductItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductItem.h; sourceTree = "<group>"; };
+		8C3075072358168B0001B242 /* ProductItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductItem.m; sourceTree = "<group>"; };
+		8C3AA1E02366872E0099712A /* buttonImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonImage.png; sourceTree = "<group>"; };
+		8C3AA1E223669D800099712A /* buttonImageSelection.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonImageSelection.png; sourceTree = "<group>"; };
+		8C3AA1E4236731980099712A /* buttonImage185x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonImage185x50.png; sourceTree = "<group>"; };
+		8C3AA1E5236731990099712A /* buttonImageSelection185x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonImageSelection185x50.png; sourceTree = "<group>"; };
+		8C4B5CF4233D4A1900C968EB /* OrderStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderStatusViewController.h; sourceTree = "<group>"; };
+		8C4B5CF5233D4A1900C968EB /* OrderStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderStatusViewController.m; sourceTree = "<group>"; };
+		8C4B5CF7233D4CE800C968EB /* OrderStatusTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderStatusTableViewCell.h; sourceTree = "<group>"; };
+		8C4B5CF8233D4CE800C968EB /* OrderStatusTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderStatusTableViewCell.m; sourceTree = "<group>"; };
+		8C8619CC233FE8640067224B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		8C8D0349230F91AD00AD8AA6 /* logo_sthealthcare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_sthealthcare.png; sourceTree = "<group>"; };
+		8C8D034B2312807B00AD8AA6 /* ProductListPopOverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductListPopOverViewController.h; sourceTree = "<group>"; };
+		8C8D034C2312807B00AD8AA6 /* ProductListPopOverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProductListPopOverViewController.m; sourceTree = "<group>"; };
+		8C8D034E231280E500AD8AA6 /* ProdDescViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProdDescViewController.h; sourceTree = "<group>"; };
+		8C8D034F231280E500AD8AA6 /* ProdDescViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProdDescViewController.m; sourceTree = "<group>"; };
+		8C8D03512312B70600AD8AA6 /* CartViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CartViewController.h; sourceTree = "<group>"; };
+		8C8D03522312B70600AD8AA6 /* CartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CartViewController.m; sourceTree = "<group>"; };
+		8CA3C9E223138BC0008B87D1 /* CartTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CartTableViewCell.h; sourceTree = "<group>"; };
+		8CA3C9E323138BC0008B87D1 /* CartTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CartTableViewCell.m; sourceTree = "<group>"; };
+		8CD5AF242355AF1800B4279C /* DBHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHandler.m; sourceTree = "<group>"; };
+		8CD5AF252355AF1A00B4279C /* DBHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHandler.h; sourceTree = "<group>"; };
+		8CD5AF272355B1A400B4279C /* ST.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ST.sqlite; sourceTree = "<group>"; };
+		8CD5AF292355B22300B4279C /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		8CE49BA0233EA773004ECB48 /* checkBoxDeSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBoxDeSelect.png; sourceTree = "<group>"; };
+		8CE49BA1233EA773004ECB48 /* checkBoxSelect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBoxSelect.png; sourceTree = "<group>"; };
+		8CE49BA4233EA7D8004ECB48 /* FavTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FavTableViewCell.h; sourceTree = "<group>"; };
+		8CE49BA5233EA7D8004ECB48 /* FavTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FavTableViewCell.m; sourceTree = "<group>"; };
+		8CF3BE122359B68000612D7C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		8CF91840230EEBFE003824A8 /* MedOrder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedOrder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CF91843230EEBFE003824A8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8CF91844230EEBFE003824A8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8CF91846230EEBFE003824A8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8CF91847230EEBFE003824A8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8CF9184A230EEBFE003824A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8CF9184C230EEBFE003824A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8CF9184F230EEBFE003824A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8CF91851230EEBFE003824A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CF91852230EEBFE003824A8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8CF91858230EEBFF003824A8 /* STLogiPadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STLogiPadTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CF9185C230EEBFF003824A8 /* STLogiPadTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STLogiPadTests.m; sourceTree = "<group>"; };
+		8CF9185E230EEBFF003824A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CF91863230EEBFF003824A8 /* STLogiPadUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STLogiPadUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CF91867230EEBFF003824A8 /* STLogiPadUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STLogiPadUITests.m; sourceTree = "<group>"; };
+		8CF91869230EEBFF003824A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8CF9183D230EEBFE003824A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CF3BE132359B68100612D7C /* MessageUI.framework in Frameworks */,
+				8CD5AF2A2355B22300B4279C /* libsqlite3.tbd in Frameworks */,
+				8C8619CD233FE8640067224B /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CF91855230EEBFF003824A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CF91860230EEBFF003824A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8C8619CB233FE8640067224B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8CF3BE122359B68000612D7C /* MessageUI.framework */,
+				8CD5AF292355B22300B4279C /* libsqlite3.tbd */,
+				8C8619CC233FE8640067224B /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8CF91837230EEBFE003824A8 = {
+			isa = PBXGroup;
+			children = (
+				8CF91842230EEBFE003824A8 /* STLogiPad */,
+				8CF9185B230EEBFF003824A8 /* STLogiPadTests */,
+				8CF91866230EEBFF003824A8 /* STLogiPadUITests */,
+				8CF91841230EEBFE003824A8 /* Products */,
+				8C8619CB233FE8640067224B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8CF91841230EEBFE003824A8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8CF91840230EEBFE003824A8 /* MedOrder.app */,
+				8CF91858230EEBFF003824A8 /* STLogiPadTests.xctest */,
+				8CF91863230EEBFF003824A8 /* STLogiPadUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8CF91842230EEBFE003824A8 /* STLogiPad */ = {
+			isa = PBXGroup;
+			children = (
+				8C3AA1E4236731980099712A /* buttonImage185x50.png */,
+				8C3AA1E5236731990099712A /* buttonImageSelection185x50.png */,
+				8C3AA1E223669D800099712A /* buttonImageSelection.png */,
+				8C3AA1E02366872E0099712A /* buttonImage.png */,
+				8C2A691C235EDA48009DC731 /* orderDetailsViewController.h */,
+				8C2A691D235EDA48009DC731 /* orderDetailsViewController.m */,
+				8CD5AF272355B1A400B4279C /* ST.sqlite */,
+				8CF91849230EEBFE003824A8 /* Main.storyboard */,
+				8C3075062358168B0001B242 /* ProductItem.h */,
+				8C3075072358168B0001B242 /* ProductItem.m */,
+				8CD5AF252355AF1A00B4279C /* DBHandler.h */,
+				8CD5AF242355AF1800B4279C /* DBHandler.m */,
+				8CE49BA4233EA7D8004ECB48 /* FavTableViewCell.h */,
+				8CE49BA5233EA7D8004ECB48 /* FavTableViewCell.m */,
+				8CE49BA0233EA773004ECB48 /* checkBoxDeSelect.png */,
+				8CE49BA1233EA773004ECB48 /* checkBoxSelect.png */,
+				8C8D0349230F91AD00AD8AA6 /* logo_sthealthcare.png */,
+				8CF91843230EEBFE003824A8 /* AppDelegate.h */,
+				8CF91844230EEBFE003824A8 /* AppDelegate.m */,
+				8CF91846230EEBFE003824A8 /* ViewController.h */,
+				8CF91847230EEBFE003824A8 /* ViewController.m */,
+				8C8D034B2312807B00AD8AA6 /* ProductListPopOverViewController.h */,
+				8C8D034C2312807B00AD8AA6 /* ProductListPopOverViewController.m */,
+				8C8D034E231280E500AD8AA6 /* ProdDescViewController.h */,
+				8C8D034F231280E500AD8AA6 /* ProdDescViewController.m */,
+				8C8D03512312B70600AD8AA6 /* CartViewController.h */,
+				8C8D03522312B70600AD8AA6 /* CartViewController.m */,
+				8CA3C9E223138BC0008B87D1 /* CartTableViewCell.h */,
+				8CA3C9E323138BC0008B87D1 /* CartTableViewCell.m */,
+				8C4B5CF7233D4CE800C968EB /* OrderStatusTableViewCell.h */,
+				8C4B5CF8233D4CE800C968EB /* OrderStatusTableViewCell.m */,
+				8C4B5CF4233D4A1900C968EB /* OrderStatusViewController.h */,
+				8C4B5CF5233D4A1900C968EB /* OrderStatusViewController.m */,
+				8CF9184C230EEBFE003824A8 /* Assets.xcassets */,
+				8C2BDE1823604C9200315956 /* no-image.png */,
+				8C2BDE1523604A7400315956 /* icon76x76.png */,
+				8C2BDE1423604A7400315956 /* icon152x152.png */,
+				8CF9184E230EEBFE003824A8 /* LaunchScreen.storyboard */,
+				8CF91851230EEBFE003824A8 /* Info.plist */,
+				8CF91852230EEBFE003824A8 /* main.m */,
+			);
+			path = STLogiPad;
+			sourceTree = "<group>";
+		};
+		8CF9185B230EEBFF003824A8 /* STLogiPadTests */ = {
+			isa = PBXGroup;
+			children = (
+				8CF9185C230EEBFF003824A8 /* STLogiPadTests.m */,
+				8CF9185E230EEBFF003824A8 /* Info.plist */,
+			);
+			path = STLogiPadTests;
+			sourceTree = "<group>";
+		};
+		8CF91866230EEBFF003824A8 /* STLogiPadUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8CF91867230EEBFF003824A8 /* STLogiPadUITests.m */,
+				8CF91869230EEBFF003824A8 /* Info.plist */,
+			);
+			path = STLogiPadUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8CF9183F230EEBFE003824A8 /* STLogiPad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CF9186C230EEBFF003824A8 /* Build configuration list for PBXNativeTarget "STLogiPad" */;
+			buildPhases = (
+				8CF9183C230EEBFE003824A8 /* Sources */,
+				8CF9183D230EEBFE003824A8 /* Frameworks */,
+				8CF9183E230EEBFE003824A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = STLogiPad;
+			productName = STLogiPad;
+			productReference = 8CF91840230EEBFE003824A8 /* MedOrder.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8CF91857230EEBFF003824A8 /* STLogiPadTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CF9186F230EEBFF003824A8 /* Build configuration list for PBXNativeTarget "STLogiPadTests" */;
+			buildPhases = (
+				8CF91854230EEBFF003824A8 /* Sources */,
+				8CF91855230EEBFF003824A8 /* Frameworks */,
+				8CF91856230EEBFF003824A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8CF9185A230EEBFF003824A8 /* PBXTargetDependency */,
+			);
+			name = STLogiPadTests;
+			productName = STLogiPadTests;
+			productReference = 8CF91858230EEBFF003824A8 /* STLogiPadTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8CF91862230EEBFF003824A8 /* STLogiPadUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CF91872230EEBFF003824A8 /* Build configuration list for PBXNativeTarget "STLogiPadUITests" */;
+			buildPhases = (
+				8CF9185F230EEBFF003824A8 /* Sources */,
+				8CF91860230EEBFF003824A8 /* Frameworks */,
+				8CF91861230EEBFF003824A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8CF91865230EEBFF003824A8 /* PBXTargetDependency */,
+			);
+			name = STLogiPadUITests;
+			productName = STLogiPadUITests;
+			productReference = 8CF91863230EEBFF003824A8 /* STLogiPadUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8CF91838230EEBFE003824A8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Sreekumar A N";
+				TargetAttributes = {
+					8CF9183F230EEBFE003824A8 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Manual;
+					};
+					8CF91857230EEBFF003824A8 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8CF9183F230EEBFE003824A8;
+					};
+					8CF91862230EEBFF003824A8 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8CF9183F230EEBFE003824A8;
+					};
+				};
+			};
+			buildConfigurationList = 8CF9183B230EEBFE003824A8 /* Build configuration list for PBXProject "STLogiPad" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8CF91837230EEBFE003824A8;
+			productRefGroup = 8CF91841230EEBFE003824A8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8CF9183F230EEBFE003824A8 /* STLogiPad */,
+				8CF91857230EEBFF003824A8 /* STLogiPadTests */,
+				8CF91862230EEBFF003824A8 /* STLogiPadUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8CF9183E230EEBFE003824A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C8D034A230F91AE00AD8AA6 /* logo_sthealthcare.png in Resources */,
+				8C3AA1E6236731990099712A /* buttonImage185x50.png in Resources */,
+				8CF91850230EEBFE003824A8 /* LaunchScreen.storyboard in Resources */,
+				8CF9184D230EEBFE003824A8 /* Assets.xcassets in Resources */,
+				8C3AA1E323669D890099712A /* buttonImageSelection.png in Resources */,
+				8C2BDE1723604A7500315956 /* icon76x76.png in Resources */,
+				8CF9184B230EEBFE003824A8 /* Main.storyboard in Resources */,
+				8CD5AF282355B1A400B4279C /* ST.sqlite in Resources */,
+				8CE49BA2233EA773004ECB48 /* checkBoxDeSelect.png in Resources */,
+				8CE49BA3233EA773004ECB48 /* checkBoxSelect.png in Resources */,
+				8C2BDE1923604C9200315956 /* no-image.png in Resources */,
+				8C3AA1E7236731990099712A /* buttonImageSelection185x50.png in Resources */,
+				8C2BDE1623604A7500315956 /* icon152x152.png in Resources */,
+				8C3AA1E1236687300099712A /* buttonImage.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CF91856230EEBFF003824A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CF91861230EEBFF003824A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8CF9183C230EEBFE003824A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C2A691E235EDA48009DC731 /* orderDetailsViewController.m in Sources */,
+				8C8D034D2312807B00AD8AA6 /* ProductListPopOverViewController.m in Sources */,
+				8CF91848230EEBFE003824A8 /* ViewController.m in Sources */,
+				8CD5AF262355AF1B00B4279C /* DBHandler.m in Sources */,
+				8C8D0350231280E500AD8AA6 /* ProdDescViewController.m in Sources */,
+				8CF91853230EEBFE003824A8 /* main.m in Sources */,
+				8C4B5CF9233D4CE800C968EB /* OrderStatusTableViewCell.m in Sources */,
+				8CE49BA6233EA7D8004ECB48 /* FavTableViewCell.m in Sources */,
+				8CA3C9E423138BC0008B87D1 /* CartTableViewCell.m in Sources */,
+				8C3075082358168B0001B242 /* ProductItem.m in Sources */,
+				8C4B5CF6233D4A1900C968EB /* OrderStatusViewController.m in Sources */,
+				8C8D03532312B70600AD8AA6 /* CartViewController.m in Sources */,
+				8CF91845230EEBFE003824A8 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CF91854230EEBFF003824A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CF9185D230EEBFF003824A8 /* STLogiPadTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CF9185F230EEBFF003824A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CF91868230EEBFF003824A8 /* STLogiPadUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8CF9185A230EEBFF003824A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CF9183F230EEBFE003824A8 /* STLogiPad */;
+			targetProxy = 8CF91859230EEBFF003824A8 /* PBXContainerItemProxy */;
+		};
+		8CF91865230EEBFF003824A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CF9183F230EEBFE003824A8 /* STLogiPad */;
+			targetProxy = 8CF91864230EEBFF003824A8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8CF91849230EEBFE003824A8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8CF9184A230EEBFE003824A8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8CF9184E230EEBFE003824A8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8CF9184F230EEBFE003824A8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8CF9186A230EEBFF003824A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8CF9186B230EEBFF003824A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8CF9186D230EEBFF003824A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Nanoveu Pte Ltd";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = T5QTE45W29;
+				INFOPLIST_FILE = STLogiPad/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nanoveu.ent.STLogiPad;
+				PRODUCT_NAME = MedOrder;
+				PROVISIONING_PROFILE = "0de774ff-1d8c-4532-9bba-666578b987a0";
+				PROVISIONING_PROFILE_SPECIFIER = "STLogiPad profile";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		8CF9186E230EEBFF003824A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Nanoveu Pte Ltd";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = T5QTE45W29;
+				INFOPLIST_FILE = STLogiPad/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nanoveu.ent.STLogiPad;
+				PRODUCT_NAME = MedOrder;
+				PROVISIONING_PROFILE = "0de774ff-1d8c-4532-9bba-666578b987a0";
+				PROVISIONING_PROFILE_SPECIFIER = "STLogiPad profile";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		8CF91870230EEBFF003824A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = STLogiPadTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zoliotech.ebridge.STLogiPadTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STLogiPad.app/STLogiPad";
+			};
+			name = Debug;
+		};
+		8CF91871230EEBFF003824A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = STLogiPadTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zoliotech.ebridge.STLogiPadTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STLogiPad.app/STLogiPad";
+			};
+			name = Release;
+		};
+		8CF91873230EEBFF003824A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = STLogiPadUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zoliotech.ebridge.STLogiPadUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = STLogiPad;
+			};
+			name = Debug;
+		};
+		8CF91874230EEBFF003824A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = STLogiPadUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zoliotech.ebridge.STLogiPadUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = STLogiPad;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8CF9183B230EEBFE003824A8 /* Build configuration list for PBXProject "STLogiPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CF9186A230EEBFF003824A8 /* Debug */,
+				8CF9186B230EEBFF003824A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CF9186C230EEBFF003824A8 /* Build configuration list for PBXNativeTarget "STLogiPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CF9186D230EEBFF003824A8 /* Debug */,
+				8CF9186E230EEBFF003824A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CF9186F230EEBFF003824A8 /* Build configuration list for PBXNativeTarget "STLogiPadTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CF91870230EEBFF003824A8 /* Debug */,
+				8CF91871230EEBFF003824A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CF91872230EEBFF003824A8 /* Build configuration list for PBXNativeTarget "STLogiPadUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CF91873230EEBFF003824A8 /* Debug */,
+				8CF91874230EEBFF003824A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8CF91838230EEBFE003824A8 /* Project object */;
+}
