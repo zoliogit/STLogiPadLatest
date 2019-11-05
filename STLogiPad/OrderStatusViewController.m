@@ -25,7 +25,7 @@
     [super viewDidLoad];
     [backbtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-    [backbtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
+    backbtn.showsTouchWhenHighlighted = YES;
     
     appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appdelegate.DBhandle getOrderstatus:appdelegate.userid];
@@ -65,9 +65,12 @@
         cell.backgroundColor=[UIColor whiteColor];
         
     }
-    else{
-        cell.backgroundColor=[UIColor colorWithRed:28.0f/255 green:175.0f/255 blue:135.0f/255 alpha:1.0f];
+    else
+    {
+        cell.backgroundColor=[UIColor lightGrayColor];
     }
+        
+                              //colorWithRed:28.0f/255 green:175.0f/255 blue:135.0f/255 alpha:1.0f];}
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     dict = [appdelegate.orderArray objectAtIndex:indexPath.row];

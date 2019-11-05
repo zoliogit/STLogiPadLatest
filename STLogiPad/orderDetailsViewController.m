@@ -26,11 +26,11 @@
     
     [backBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-    [backBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
+   backBtn.showsTouchWhenHighlighted = YES;
     
     [ReorderBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-    [ReorderBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
+    ReorderBtn.showsTouchWhenHighlighted = YES;
     
      appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     // Do any additional setup after loading the view.
@@ -58,7 +58,8 @@
             
         }
         else{
-            cell.backgroundColor=[UIColor colorWithRed:28.0f/255 green:175.0f/255 blue:135.0f/255 alpha:1.0f];
+            cell.backgroundColor=[UIColor lightGrayColor];
+                                  //colorWithRed:28.0f/255 green:175.0f/255 blue:135.0f/255 alpha:1.0f];
         }
         ProductItem *pitem = [[ProductItem alloc] init];
         pitem = [appdelegate.orderDetailsArray objectAtIndex:indexPath.row];

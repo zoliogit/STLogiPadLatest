@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ProductListPopOverViewController.h"
 #import <MessageUI/MessageUI.h>
+#import "ZBarSDK.h"
 
-
-@interface CartViewController : UIViewController<UIPopoverControllerDelegate,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,MFMailComposeViewControllerDelegate>
+@interface CartViewController : UIViewController<UIPopoverControllerDelegate,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,MFMailComposeViewControllerDelegate,ZBarReaderDelegate>
 {
     
     __weak IBOutlet UIButton *orderBtn;
@@ -32,6 +32,7 @@
     NSMutableArray *tempArray;
     BOOL isLogout;
 }
+
 - (IBAction)productsClicked:(id)sender;
 - (IBAction)ScnBtnClicked:(id)sender;
 - (IBAction)FavbtnClicked:(id)sender;

@@ -28,8 +28,9 @@
     
     
     [loginBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
+    loginBtn.showsTouchWhenHighlighted = YES;
     
-    [loginBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
+//    [loginBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
    
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -45,7 +46,7 @@
 - (IBAction)LoginPressed:(id)sender {
     
      appdelegate.islogin = YES;
-    loginBtn.selected = YES;
+    //loginBtn.selected = YES;
      [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"login"];
      [[NSUserDefaults standardUserDefaults] setValue:_username.text forKey:@"username"];
      [[NSUserDefaults standardUserDefaults] synchronize];

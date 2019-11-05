@@ -25,19 +25,19 @@
     
     [backBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-    [backBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
+   backBtn.showsTouchWhenHighlighted = YES;
     
     [favbtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-    [favbtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
+   favbtn.showsTouchWhenHighlighted = YES;
     
     [delBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-    [delBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
+   delBtn.showsTouchWhenHighlighted = YES;
     
     [addBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-    [addBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
+    addBtn.showsTouchWhenHighlighted = YES;
     
     Isdelete = YES;
     appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -46,6 +46,10 @@
   
     uom.text = [NSString stringWithFormat:@"UOM : %@",appdelegate.SelectedpItem.productuom];
     Pdesc.text = appdelegate.SelectedpItem.proddescription;
+    
+    if(appdelegate.isFromQR)
+     qtyLabel.text = [NSString stringWithFormat:@"%d", appdelegate.SelectedpItem.QRQuantity];
+    else
     qtyLabel.text = [NSString stringWithFormat:@"%d", appdelegate.SelectedpItem.quantity];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

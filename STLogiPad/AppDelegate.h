@@ -24,7 +24,7 @@
 @property ProductItem *SelectedpItem;
 @property int currentOrderId;
 @property NSMutableArray *orderArray, *orderDetailsArray;
-@property BOOL islogin;
+@property BOOL islogin,isFromQR;
 
 -(void)getcustProducts;
 

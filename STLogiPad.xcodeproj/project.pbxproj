@@ -18,6 +18,17 @@
 		8C3AA1E7236731990099712A /* buttonImageSelection185x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C3AA1E5236731990099712A /* buttonImageSelection185x50.png */; };
 		8C4B5CF6233D4A1900C968EB /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B5CF5233D4A1900C968EB /* OrderStatusViewController.m */; };
 		8C4B5CF9233D4CE800C968EB /* OrderStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B5CF8233D4CE800C968EB /* OrderStatusTableViewCell.m */; };
+		8C55EEBA236809C100788DA4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C55EEB9236809C000788DA4 /* CoreGraphics.framework */; };
+		8C55EEBC236809CB00788DA4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C55EEBB236809CB00788DA4 /* CoreMedia.framework */; };
+		8C55EEBE236809D600788DA4 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C55EEBD236809D600788DA4 /* CoreAudio.framework */; };
+		8C55EEC0236809E000788DA4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C55EEBF236809E000788DA4 /* CoreVideo.framework */; };
+		8C55EEC2236809E900788DA4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C55EEC1236809E900788DA4 /* QuartzCore.framework */; };
+		8C55EEC4236809F800788DA4 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C55EEC3236809F700788DA4 /* libiconv.tbd */; };
+		8C55EEE423680FE200788DA4 /* zbar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C55EEDF23680FE100788DA4 /* zbar-back.png */; };
+		8C55EEE523680FE200788DA4 /* zbar-help.html in Resources */ = {isa = PBXBuildFile; fileRef = 8C55EEE023680FE100788DA4 /* zbar-help.html */; };
+		8C55EEE623680FE200788DA4 /* zbar-helpicons.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C55EEE123680FE100788DA4 /* zbar-helpicons.png */; };
+		8C55EEE723680FE200788DA4 /* zbar-samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C55EEE223680FE100788DA4 /* zbar-samples.png */; };
+		8C55EEE823681F7100788DA4 /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C55EEDD23680FE100788DA4 /* libzbar.a */; };
 		8C8619CD233FE8640067224B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8619CC233FE8640067224B /* AVFoundation.framework */; };
 		8C8D034A230F91AE00AD8AA6 /* logo_sthealthcare.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C8D0349230F91AD00AD8AA6 /* logo_sthealthcare.png */; };
 		8C8D034D2312807B00AD8AA6 /* ProductListPopOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D034C2312807B00AD8AA6 /* ProductListPopOverViewController.m */; };
@@ -74,6 +85,37 @@
 		8C4B5CF5233D4A1900C968EB /* OrderStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderStatusViewController.m; sourceTree = "<group>"; };
 		8C4B5CF7233D4CE800C968EB /* OrderStatusTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderStatusTableViewCell.h; sourceTree = "<group>"; };
 		8C4B5CF8233D4CE800C968EB /* OrderStatusTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderStatusTableViewCell.m; sourceTree = "<group>"; };
+		8C55EEB9236809C000788DA4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8C55EEBB236809CB00788DA4 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		8C55EEBD236809D600788DA4 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		8C55EEBF236809E000788DA4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		8C55EEC1236809E900788DA4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8C55EEC3236809F700788DA4 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		8C55EEC923680FE100788DA4 /* Decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Decoder.h; sourceTree = "<group>"; };
+		8C55EECA23680FE100788DA4 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
+		8C55EECB23680FE100788DA4 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		8C55EECC23680FE100788DA4 /* ImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScanner.h; sourceTree = "<group>"; };
+		8C55EECD23680FE100788DA4 /* Processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Processor.h; sourceTree = "<group>"; };
+		8C55EECE23680FE100788DA4 /* Scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scanner.h; sourceTree = "<group>"; };
+		8C55EECF23680FE100788DA4 /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Symbol.h; sourceTree = "<group>"; };
+		8C55EED023680FE100788DA4 /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
+		8C55EED123680FE100788DA4 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
+		8C55EED223680FE100788DA4 /* zbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zbar.h; sourceTree = "<group>"; };
+		8C55EED323680FE100788DA4 /* ZBarCameraSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarCameraSimulator.h; sourceTree = "<group>"; };
+		8C55EED423680FE100788DA4 /* ZBarCaptureReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarCaptureReader.h; sourceTree = "<group>"; };
+		8C55EED523680FE100788DA4 /* ZBarHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarHelpController.h; sourceTree = "<group>"; };
+		8C55EED623680FE100788DA4 /* ZBarImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarImage.h; sourceTree = "<group>"; };
+		8C55EED723680FE100788DA4 /* ZBarImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarImageScanner.h; sourceTree = "<group>"; };
+		8C55EED823680FE100788DA4 /* ZBarReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderController.h; sourceTree = "<group>"; };
+		8C55EED923680FE100788DA4 /* ZBarReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderView.h; sourceTree = "<group>"; };
+		8C55EEDA23680FE100788DA4 /* ZBarReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderViewController.h; sourceTree = "<group>"; };
+		8C55EEDB23680FE100788DA4 /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSDK.h; sourceTree = "<group>"; };
+		8C55EEDC23680FE100788DA4 /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
+		8C55EEDD23680FE100788DA4 /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
+		8C55EEDF23680FE100788DA4 /* zbar-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-back.png"; sourceTree = "<group>"; };
+		8C55EEE023680FE100788DA4 /* zbar-help.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "zbar-help.html"; sourceTree = "<group>"; };
+		8C55EEE123680FE100788DA4 /* zbar-helpicons.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-helpicons.png"; sourceTree = "<group>"; };
+		8C55EEE223680FE100788DA4 /* zbar-samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zbar-samples.png"; sourceTree = "<group>"; };
 		8C8619CC233FE8640067224B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8C8D0349230F91AD00AD8AA6 /* logo_sthealthcare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_sthealthcare.png; sourceTree = "<group>"; };
 		8C8D034B2312807B00AD8AA6 /* ProductListPopOverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProductListPopOverViewController.h; sourceTree = "<group>"; };
@@ -116,6 +158,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C55EEE823681F7100788DA4 /* libzbar.a in Frameworks */,
+				8C55EEC4236809F800788DA4 /* libiconv.tbd in Frameworks */,
+				8C55EEC2236809E900788DA4 /* QuartzCore.framework in Frameworks */,
+				8C55EEC0236809E000788DA4 /* CoreVideo.framework in Frameworks */,
+				8C55EEBE236809D600788DA4 /* CoreAudio.framework in Frameworks */,
+				8C55EEBC236809CB00788DA4 /* CoreMedia.framework in Frameworks */,
+				8C55EEBA236809C100788DA4 /* CoreGraphics.framework in Frameworks */,
 				8CF3BE132359B68100612D7C /* MessageUI.framework in Frameworks */,
 				8CD5AF2A2355B22300B4279C /* libsqlite3.tbd in Frameworks */,
 				8C8619CD233FE8640067224B /* AVFoundation.framework in Frameworks */,
@@ -139,9 +188,79 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C55EEC523680FE100788DA4 /* ZBarSDK */ = {
+			isa = PBXGroup;
+			children = (
+				8C55EEC623680FE100788DA4 /* Headers */,
+				8C55EEDD23680FE100788DA4 /* libzbar.a */,
+				8C55EEDE23680FE100788DA4 /* Resources */,
+			);
+			path = ZBarSDK;
+			sourceTree = "<group>";
+		};
+		8C55EEC623680FE100788DA4 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				8C55EEC723680FE100788DA4 /* ZBarSDK */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		8C55EEC723680FE100788DA4 /* ZBarSDK */ = {
+			isa = PBXGroup;
+			children = (
+				8C55EEC823680FE100788DA4 /* zbar */,
+				8C55EED223680FE100788DA4 /* zbar.h */,
+				8C55EED323680FE100788DA4 /* ZBarCameraSimulator.h */,
+				8C55EED423680FE100788DA4 /* ZBarCaptureReader.h */,
+				8C55EED523680FE100788DA4 /* ZBarHelpController.h */,
+				8C55EED623680FE100788DA4 /* ZBarImage.h */,
+				8C55EED723680FE100788DA4 /* ZBarImageScanner.h */,
+				8C55EED823680FE100788DA4 /* ZBarReaderController.h */,
+				8C55EED923680FE100788DA4 /* ZBarReaderView.h */,
+				8C55EEDA23680FE100788DA4 /* ZBarReaderViewController.h */,
+				8C55EEDB23680FE100788DA4 /* ZBarSDK.h */,
+				8C55EEDC23680FE100788DA4 /* ZBarSymbol.h */,
+			);
+			path = ZBarSDK;
+			sourceTree = "<group>";
+		};
+		8C55EEC823680FE100788DA4 /* zbar */ = {
+			isa = PBXGroup;
+			children = (
+				8C55EEC923680FE100788DA4 /* Decoder.h */,
+				8C55EECA23680FE100788DA4 /* Exception.h */,
+				8C55EECB23680FE100788DA4 /* Image.h */,
+				8C55EECC23680FE100788DA4 /* ImageScanner.h */,
+				8C55EECD23680FE100788DA4 /* Processor.h */,
+				8C55EECE23680FE100788DA4 /* Scanner.h */,
+				8C55EECF23680FE100788DA4 /* Symbol.h */,
+				8C55EED023680FE100788DA4 /* Video.h */,
+				8C55EED123680FE100788DA4 /* Window.h */,
+			);
+			path = zbar;
+			sourceTree = "<group>";
+		};
+		8C55EEDE23680FE100788DA4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8C55EEDF23680FE100788DA4 /* zbar-back.png */,
+				8C55EEE023680FE100788DA4 /* zbar-help.html */,
+				8C55EEE123680FE100788DA4 /* zbar-helpicons.png */,
+				8C55EEE223680FE100788DA4 /* zbar-samples.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		8C8619CB233FE8640067224B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C55EEC3236809F700788DA4 /* libiconv.tbd */,
+				8C55EEC1236809E900788DA4 /* QuartzCore.framework */,
+				8C55EEBF236809E000788DA4 /* CoreVideo.framework */,
+				8C55EEBD236809D600788DA4 /* CoreAudio.framework */,
+				8C55EEBB236809CB00788DA4 /* CoreMedia.framework */,
+				8C55EEB9236809C000788DA4 /* CoreGraphics.framework */,
 				8CF3BE122359B68000612D7C /* MessageUI.framework */,
 				8CD5AF292355B22300B4279C /* libsqlite3.tbd */,
 				8C8619CC233FE8640067224B /* AVFoundation.framework */,
@@ -173,6 +292,7 @@
 		8CF91842230EEBFE003824A8 /* STLogiPad */ = {
 			isa = PBXGroup;
 			children = (
+				8C55EEC523680FE100788DA4 /* ZBarSDK */,
 				8C3AA1E4236731980099712A /* buttonImage185x50.png */,
 				8C3AA1E5236731990099712A /* buttonImageSelection185x50.png */,
 				8C3AA1E223669D800099712A /* buttonImageSelection.png */,
@@ -342,10 +462,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C8D034A230F91AE00AD8AA6 /* logo_sthealthcare.png in Resources */,
+				8C55EEE623680FE200788DA4 /* zbar-helpicons.png in Resources */,
+				8C55EEE723680FE200788DA4 /* zbar-samples.png in Resources */,
 				8C3AA1E6236731990099712A /* buttonImage185x50.png in Resources */,
 				8CF91850230EEBFE003824A8 /* LaunchScreen.storyboard in Resources */,
 				8CF9184D230EEBFE003824A8 /* Assets.xcassets in Resources */,
+				8C55EEE423680FE200788DA4 /* zbar-back.png in Resources */,
 				8C3AA1E323669D890099712A /* buttonImageSelection.png in Resources */,
+				8C55EEE523680FE200788DA4 /* zbar-help.html in Resources */,
 				8C2BDE1723604A7500315956 /* icon76x76.png in Resources */,
 				8CF9184B230EEBFE003824A8 /* Main.storyboard in Resources */,
 				8CD5AF282355B1A400B4279C /* ST.sqlite in Resources */,
@@ -498,6 +622,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "  arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -547,6 +672,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "  arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -558,14 +684,20 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T5QTE45W29;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = STLogiPad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/STLogiPad/ZBarSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanoveu.ent.STLogiPad;
 				PRODUCT_NAME = MedOrder;
 				PROVISIONING_PROFILE = "0de774ff-1d8c-4532-9bba-666578b987a0";
 				PROVISIONING_PROFILE_SPECIFIER = "STLogiPad profile";
 				TARGETED_DEVICE_FAMILY = 2;
+				VALID_ARCHS = " arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -577,14 +709,20 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T5QTE45W29;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = STLogiPad/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/STLogiPad/ZBarSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanoveu.ent.STLogiPad;
 				PRODUCT_NAME = MedOrder;
 				PROVISIONING_PROFILE = "0de774ff-1d8c-4532-9bba-666578b987a0";
 				PROVISIONING_PROFILE_SPECIFIER = "STLogiPad profile";
 				TARGETED_DEVICE_FAMILY = 2;
+				VALID_ARCHS = " arm64 armv7 armv7s";
 			};
 			name = Release;
 		};

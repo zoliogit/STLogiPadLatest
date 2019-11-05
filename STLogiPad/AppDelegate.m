@@ -18,10 +18,11 @@
 @end
 
 @implementation AppDelegate
-@synthesize SelProdCode,prodArray,cartArray,favArray,DBhandle,userid,SelectedpItem,syncDateTime,currentOrderId,orderArray,orderDetailsArray,islogin;
+@synthesize SelProdCode,prodArray,cartArray,favArray,DBhandle,userid,SelectedpItem,syncDateTime,currentOrderId,orderArray,orderDetailsArray,islogin,isFromQR;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    isFromQR = NO;
     DBhandle=[DBHandler alloc];
     SelectedpItem = [[ProductItem alloc] init];
     [DBhandle createEditableCopyOfDatabaseIfNeeded];

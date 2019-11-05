@@ -15,7 +15,7 @@
 @property NSString *productcode;
 @property NSString *proddescription;
 @property NSString *productuom;
-@property int quantity;
+@property int quantity,QRQuantity;
 @property NSString* image;
 
 @end

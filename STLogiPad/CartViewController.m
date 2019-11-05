@@ -41,36 +41,37 @@
     
     [favBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-    [favBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
-    
+   
+    favBtn.showsTouchWhenHighlighted = YES;
     
     [syncBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-    [syncBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
+   syncBtn.showsTouchWhenHighlighted = YES;
     
     [productsBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-    [productsBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
+   productsBtn.showsTouchWhenHighlighted = YES;
     
     [FavCartBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage185x50.png"] forState:UIControlStateNormal];
     
-    [FavCartBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection185x50.png"] forState:UIControlStateSelected];
+   FavCartBtn.showsTouchWhenHighlighted = YES;
     
     [submitBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-    [submitBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
+   submitBtn.showsTouchWhenHighlighted = YES;
     
     [scanBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-    [scanBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection.png"] forState:UIControlStateSelected];
+   scanBtn.showsTouchWhenHighlighted = YES;
     
     [orderBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage185x50.png"] forState:UIControlStateNormal];
     
-    [orderBtn setBackgroundImage:[UIImage imageNamed:@"buttonImageSelection185x50.png"] forState:UIControlStateSelected];
+    orderBtn.showsTouchWhenHighlighted = YES;
     
-    
+   
     
     appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    
     isLogout = NO;
     favcartArray = [[NSMutableArray alloc]init];
     tempArray = [[NSMutableArray alloc]init];
@@ -175,7 +176,8 @@ return 0;
             
         }
         else{
-            cell.backgroundColor=[UIColor colorWithRed:28.0f/255 green:175.0f/255 blue:135.0f/255 alpha:1.0f];
+            cell.backgroundColor=[UIColor lightGrayColor];
+                                  //colorWithRed:28.0f/255 green:175.0f/255 blue:135.0f/255 alpha:1.0f];
         }
         ProductItem *pitem = [[ProductItem alloc] init];
         pitem = [appdelegate.cartArray objectAtIndex:indexPath.row];
@@ -253,8 +255,9 @@ return 0;
     {
       ProductItem *pitem = [[ProductItem alloc] init];
       pitem = [appdelegate.prodArray objectAtIndex:indexPath.row];
-        appdelegate.SelectedpItem = pitem;
+    appdelegate.SelectedpItem = pitem;
       NSLog(@"appdelegate.SelProdCode :%@",appdelegate.SelProdCode);
+        appdelegate.isFromQR = NO;
       ProdDescViewController *pdv = [self.storyboard instantiateViewControllerWithIdentifier:@"ProdDescViewController"];
       [self presentViewController:pdv animated:YES completion:nil];
      }
@@ -346,30 +349,109 @@ return 0;
 
 - (IBAction)ScnBtnClicked:(id)sender {
     
+     scanBtn.selected = YES;
     
-    scanBtn.selected = YES;
+    ZBarReaderViewController *codeReader = [ZBarReaderViewController new];
+    codeReader.readerDelegate=self;
+    codeReader.supportedOrientationsMask = ZBarOrientationMaskAll;
     
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    picker.delegate = self;
-    [self presentViewController:picker animated:YES completion:nil];
+    ZBarImageScanner *scanner = codeReader.scanner;
+    [scanner setSymbology: ZBAR_I25 config: ZBAR_CFG_ENABLE to: 0];
+    
+    [self presentViewController:codeReader animated:YES completion:nil];
+    
+   
+    
+//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+//    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    picker.delegate = self;
+//    [self presentViewController:picker animated:YES completion:nil];
    
     
     
 }
-- (void)imagePickerController:(UIImagePickerController *)picker
-        didFinishPickingImage:(UIImage *)image
-                  editingInfo:(NSDictionary *)editingInfo
-{
-    //imageView.image = image;
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
 
-}
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+- (void) imagePickerController: (UIImagePickerController*) reader didFinishPickingMediaWithInfo: (NSDictionary*) info
 {
-    [self dismissModalViewControllerAnimated:YES];
+    //  get the decode results
+    id<NSFastEnumeration> results = [info objectForKey: ZBarReaderControllerResults];
+    
+    ZBarSymbol *symbol = nil;
+    for(symbol in results)
+        // just grab the first barcode
+        break;
+    
+    // showing the result on textview
+   
+    
+    NSString *scannedCode = symbol.data;//@"001140030|10";//symbol.data;
+    if ([scannedCode rangeOfString:@"|"].location == NSNotFound)
+    {
+        //[reader dismissModalViewControllerAnimated: YES];
+        
+        UIAlertView *alertsuccess = [[UIAlertView alloc] initWithTitle:@"Invalid Code!" message:@"The scanned code is invalid." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertsuccess show];
+       
+        return;
+    }
+    NSString *pdtCode = [scannedCode substringToIndex:([scannedCode rangeOfString:@"|"].location)];
+    NSString *quanStr = [scannedCode substringFromIndex:([scannedCode rangeOfString:@"|"].location + 1)];
+     NSLog(@"pdtCode: %@", pdtCode);
+    NSLog(@"quanStr: %@", quanStr);
+    BOOL found = NO;
+    for(int i=0; i< appdelegate.prodArray.count;i++)
+    {
+        ProductItem *pitem = [[ProductItem alloc] init];
+        pitem = [appdelegate.prodArray objectAtIndex:i];
+        if([pitem.productcode isEqualToString:pdtCode])
+        {
+            pitem.QRQuantity = [quanStr integerValue];
+            appdelegate.SelectedpItem = pitem;
+            found = YES;
+        }
+        
+    }
+    
+    [reader dismissModalViewControllerAnimated: YES];
+    if(found)
+    {
+        appdelegate.isFromQR = YES;
+        ProdDescViewController *pdv = [self.storyboard instantiateViewControllerWithIdentifier:@"ProdDescViewController"];
+        [self presentViewController:pdv animated:YES completion:nil];
+    }
+    else
+    {
+    UIAlertView *alertsuccess = [[UIAlertView alloc] initWithTitle:@"Product Mismatch!" message:@"The scanned code does not match any product in the inventory." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alertsuccess show];
+    }
+        
+    
+    
+    // dismiss the controller
+   // [reader dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+
+//- (void)imagePickerController:(UIImagePickerController *)picker
+//        didFinishPickingImage:(UIImage *)image
+//                  editingInfo:(NSDictionary *)editingInfo
+//{
+//    //imageView.image = image;
+//    [picker dismissViewControllerAnimated:YES completion:nil];
+//
+//
+//}
+//-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+//{
+//    [self dismissModalViewControllerAnimated:YES];
+//}
+
+
+
+
+
+
 
 - (IBAction)FavbtnClicked:(id)sender {
     
