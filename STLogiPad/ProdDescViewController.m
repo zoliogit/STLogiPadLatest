@@ -123,7 +123,7 @@
 
 - (IBAction)DelBtnPressed:(id)sender {
     
-     delBtn.selected = YES;
+            delBtn.selected = YES;
     
             Isdelete = NO;
            [appdelegate.DBhandle deletefromcart:appdelegate.SelectedpItem userid:appdelegate.userid];
@@ -198,19 +198,12 @@
         if(Isdelete == YES)
         {
         
-        for(int i=0;i<appdelegate.cartArray.count;i++)
-        {
-            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-            dict = [appdelegate.cartArray objectAtIndex:i];
-            if([appdelegate.SelectedpItem.productcode isEqualToString:[dict objectForKey:@"ProductCode"]])
-            {
-                [appdelegate.cartArray removeObjectAtIndex:i];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Product successfully deleted from cart" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
-                [alert show];
-                
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
-        }
+            [appdelegate.DBhandle deletefromcart:appdelegate.SelectedpItem userid:appdelegate.userid];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Product successfully deleted from cart" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
+            [alert show];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
     }
     }
 }

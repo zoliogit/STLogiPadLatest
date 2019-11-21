@@ -11,7 +11,7 @@
 #import <MessageUI/MessageUI.h>
 #import "ZBarSDK.h"
 
-@interface CartViewController : UIViewController<UIPopoverControllerDelegate,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,MFMailComposeViewControllerDelegate,ZBarReaderDelegate>
+@interface CartViewController : UIViewController<UIPopoverControllerDelegate,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,MFMailComposeViewControllerDelegate,ZBarReaderDelegate,UISearchBarDelegate>
 {
     
     __weak IBOutlet UIButton *orderBtn;
@@ -27,12 +27,15 @@
     __weak IBOutlet UIButton *productsBtn;
     ProductListPopOverViewController *productListPopOverViewController;
     IBOutlet UITableView *productListTable;
+    
+    
+    
     UIPopoverController *popoverController;
     NSMutableArray *favcartArray;
     NSMutableArray *tempArray;
     BOOL isLogout;
 }
-
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 - (IBAction)productsClicked:(id)sender;
 - (IBAction)ScnBtnClicked:(id)sender;
 - (IBAction)FavbtnClicked:(id)sender;

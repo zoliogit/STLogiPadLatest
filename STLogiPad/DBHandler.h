@@ -20,8 +20,25 @@
 }
 -(void)createEditableCopyOfDatabaseIfNeeded;
 -(void)addproductsdetails :(ProductItem*)Proditem;
--(void)adduserdetails :(ProductItem*)Proditem user_id:(NSString*)username;
--(void)getproductsdetails:(NSString*)username;
+
+
+//Changed ones
+//-(void)adduserdetails :(ProductItem*)Proditem user_id:(NSString*)username;
+//-(void)deleteStatusWithOne:(NSString*)username;
+//-(void)updateUser_Product:(NSString*)username;
+//-(void)sync:(NSString*)username;
+//-(void)getsynctime:(NSString*)username;
+//-(void)getproductsdetails:(NSString*)username;
+
+//Newones
+-(void)adduserdetails :(ProductItem*)Proditem;
+-(void)deleteStatusWithOne;
+-(void)updateUser_Product;
+-(void)sync;
+-(void)getsynctime;
+-(void)getproductsdetails;
+
+
 -(BOOL)addToCart:(ProductItem*)PSelectItem userid:(NSString*)username;
 -(void)getcart:(NSString*)username;
 -(void)updatecart:(ProductItem*)PSelectItem userid:(NSString*)username;
@@ -29,14 +46,15 @@
 -(void)addToFav:(ProductItem*)PSelectItem userid:(NSString*)username;
 -(void)getfav:(NSString*)username;
 -(void)deletefromfav:(ProductItem *)PSelectItem userid:(NSString*)username;
--(void)sync:(NSString*)username;
--(void)getsynctime:(NSString*)username;
--(void)updateUser_Product:(NSString*)username;
--(void)deleteStatusWithOne:(NSString*)username;
+
+
+
 -(void)addOrderStatus:(NSString*)username totalItm:(int)NoOfItem;
 -(void)addOrderDetails;
 -(void)getOrderstatus:(NSString*)username;
 -(void)getOrderdetails:(int)order_id;
+
+
 
 
 @end

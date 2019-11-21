@@ -67,7 +67,7 @@
     }
     else
     {
-        cell.backgroundColor=[UIColor lightGrayColor];
+         cell.backgroundColor=[UIColor colorWithRed:204.0f/255 green:204.0f/255 blue:204.0f/255 alpha:1.0f];
     }
         
                               //colorWithRed:28.0f/255 green:175.0f/255 blue:135.0f/255 alpha:1.0f];}

@@ -16,8 +16,9 @@
 #import "ProductItem.h"
 #import <MessageUI/MessageUI.h>
 #import "OrderStatusViewController.h"
+#import "customerItem.h"
 
-
+#define FILE_URL @"http://www.scholartools.com/ios/STH/uploaded_files/"
 
 @interface CartViewController ()
 {
@@ -25,6 +26,11 @@
     AVCaptureSession *session;
     AVCaptureStillImageOutput *stillImageOutput;
     UIActivityIndicatorView *spinner ;
+    
+    NSMutableArray *filteredproducts;
+    
+    BOOL isFiltered;
+     BOOL isImageDownloadComplete;
    // UIButton *favCartBtn;
 }
 
@@ -38,10 +44,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    isFiltered = false;
+    isImageDownloadComplete = NO;
+    NSLog(@"email :%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"email"]);
+    NSArray *listItems = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cc"] componentsSeparatedByString:@";"];
+    NSLog(@"cc :%@ %@ %@",listItems[0],listItems[1],listItems[2]);
     [favBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
-    
+    self.searchBar.delegate = self;
    
+    filteredproducts = [[NSMutableArray alloc]init];
+    
     favBtn.showsTouchWhenHighlighted = YES;
     
     [syncBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
@@ -80,10 +92,13 @@
     {
        
         appdelegate.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-        [appdelegate getcustProducts];
+        appdelegate.warehousecode =  [[NSUserDefaults standardUserDefaults] objectForKey:@"warehousecode"];
+        appdelegate.syncDateTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"datetime"];
+        NSLog(@"dat :%@",appdelegate.syncDateTime);
+       
     }
     
-    [loggedBtn setTitle:[NSString stringWithFormat:@"Logged in as %@:",appdelegate.userid] forState:UIControlStateNormal];
+     [loggedBtn setTitle:[NSString stringWithFormat:@"Logged in as %@:",appdelegate.userid] forState:UIControlStateNormal];
     
     //favTable.allowsMultipleSelection = YES;
   //  favCartBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -93,10 +108,12 @@
     //[favCartBtn setTitle:@"Add to Cart" forState:UIControlStateNormal];
     
     
-     [appdelegate.DBhandle getproductsdetails:appdelegate.userid];
+     //[appdelegate.DBhandle getproductsdetails:appdelegate.userid];
+    
+    [appdelegate.DBhandle getproductsdetails];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mm:ss a"];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mm a"];
     
     
      BOOL today = [[NSCalendar currentCalendar] isDateInToday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
@@ -149,11 +166,52 @@
 
 #pragma mark - UITableView Functions
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    
+    if (searchText.length == 0) {
+        
+        isFiltered = false;
+        
+        [self.searchBar endEditing:YES];
+        
+    }
+    
+    else {
+        
+        isFiltered = true;
+        
+        filteredproducts = [[NSMutableArray alloc]init];
+        
+        for(int i=0;i<appdelegate.prodArray.count;i++)
+        {
+            ProductItem *pitem = [[ProductItem alloc] init];
+            pitem = [appdelegate.prodArray objectAtIndex:i];
+            NSRange range = [pitem.proddescription rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            if (range.location != NSNotFound) {
+                
+                [filteredproducts addObject:pitem.proddescription];
+                
+            }
+        }
+        
+       
+    }
+    NSLog(@"filteredproducts:%@",filteredproducts);
+    [productListTable reloadData];
+    
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
 if(tableView == productListTable)
+{
+    if (isFiltered) {
+        
+        return filteredproducts.count;
+        
+    }
 return [appdelegate.prodArray count];
+}
 if(tableView == cartTable)
 return [appdelegate.cartArray count];
 if(tableView == favTable)
@@ -176,8 +234,7 @@ return 0;
             
         }
         else{
-            cell.backgroundColor=[UIColor lightGrayColor];
-                                  //colorWithRed:28.0f/255 green:175.0f/255 blue:135.0f/255 alpha:1.0f];
+            cell.backgroundColor=[UIColor colorWithRed:204.0f/255 green:204.0f/255 blue:204.0f/255 alpha:1.0f];
         }
         ProductItem *pitem = [[ProductItem alloc] init];
         pitem = [appdelegate.cartArray objectAtIndex:indexPath.row];
@@ -206,7 +263,13 @@ return 0;
     }
         ProductItem *pitem = [[ProductItem alloc] init];
         pitem = [appdelegate.prodArray objectAtIndex:indexPath.row];
-        
+    
+    if (isFiltered) {
+            
+            cell.textLabel.text= [filteredproducts objectAtIndex:indexPath.row];
+            
+        }
+        else
     cell.textLabel.text = pitem.proddescription;
     
     return cell;
@@ -255,7 +318,24 @@ return 0;
     {
       ProductItem *pitem = [[ProductItem alloc] init];
       pitem = [appdelegate.prodArray objectAtIndex:indexPath.row];
-    appdelegate.SelectedpItem = pitem;
+        
+      if (isFiltered)
+      {
+          for(int i=0;i<appdelegate.prodArray.count;i++)
+          {
+              ProductItem *pitem = [[ProductItem alloc] init];
+              pitem = [appdelegate.prodArray objectAtIndex:i];
+
+              if([pitem.proddescription isEqualToString:[filteredproducts objectAtIndex:indexPath.row]])
+              {
+                  appdelegate.SelectedpItem = pitem;
+              }
+          }
+          
+      }
+        else
+      appdelegate.SelectedpItem = pitem;
+        
       NSLog(@"appdelegate.SelProdCode :%@",appdelegate.SelProdCode);
         appdelegate.isFromQR = NO;
       ProdDescViewController *pdv = [self.storyboard instantiateViewControllerWithIdentifier:@"ProdDescViewController"];
@@ -459,7 +539,7 @@ return 0;
     NSLog(@"app;%@",appdelegate.favArray);
     [productListTable removeFromSuperview];
     favTable.hidden = NO;
-    favTable.frame = CGRectMake(0,60, 450, 460);
+    favTable.frame = CGRectMake(0,60, 400, 460);
     FavCartBtn.hidden = NO;
    FavCartBtn.frame = CGRectMake(225,10, 160, 40);
     [productListPopOverViewController.view addSubview:FavCartBtn];
@@ -495,7 +575,17 @@ return 0;
     {
         MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
         mail.mailComposeDelegate = self;
-        [mail setSubject:@"New Order Details"];
+        
+        NSDate *date = [NSDate date];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+       [dateFormat setDateFormat:@"yyMMddHHmm"];
+        NSString *dateString = [dateFormat stringFromDate:date];
+        
+        NSString *currOrdNum = [NSString stringWithFormat:@"%@%@",appdelegate.userid, dateString];
+        
+        NSString *subjStr = [NSString stringWithFormat:@"ST Healthcare Inventory Cart   -   Order Number: %@   -   CustCode: %@   -   Warehouse Code: %@", currOrdNum, appdelegate.userid,appdelegate.warehousecode];
+        
+        [mail setSubject:subjStr];
         
         NSString *tableFirstLine = @"<table width='100%' border='1'><tr align='center' ><td> SL_No </td><td> ProductCode </td><td> Description </td><td> UOM </td><td> Quantity </td></tr>";
         NSString *messageBody = @"";
@@ -522,7 +612,18 @@ return 0;
         }
         NSLog(@"message:%@",messageBody);
         [mail setMessageBody:messageBody isHTML:YES];
-        [mail setToRecipients:@[@"dharsana@zoliotech.com"]];
+         NSArray *emailItems = [[[NSUserDefaults standardUserDefaults] objectForKey:@"email"] componentsSeparatedByString:@";"];
+        
+        
+        [mail setToRecipients:emailItems];
+        
+        
+        NSArray *listItems = [[[NSUserDefaults standardUserDefaults] objectForKey:@"cc"] componentsSeparatedByString:@";"];
+        
+       
+        [mail setCcRecipients:listItems];
+        
+        
         [mail setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
         [self presentViewController:mail animated:YES completion:NULL];
     }
@@ -641,44 +742,198 @@ return 0;
     syncBtn.selected = YES;
     [self createSpinnerView];
     [self performSelector:@selector(callFunc) withObject:self afterDelay:0.1];
-//    [spinner stopAnimating];
-//    UIView *view=[self.view viewWithTag:8887];
-//    [view removeFromSuperview];
+
     
 }
+
+
 -(void)callFunc
 {
-    [appdelegate getcustProducts];
+    [self syncCall];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mm:ss a"];
-    
-    
+    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mm a"];
+
+
     BOOL today = [[NSCalendar currentCalendar] isDateInToday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
     NSArray *seperateString = [appdelegate.syncDateTime componentsSeparatedByString:@" "];
-    
+
     if(today)
     {
         appdelegate.syncDateTime = [NSString stringWithFormat:@"Today %@ %@",seperateString[1],seperateString[2]];
     }
     BOOL yesterday = [[NSCalendar currentCalendar] isDateInYesterday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
-    
+
     NSLog(@"date :%d",yesterday);
-    
+
     if(yesterday)
     {
-        
+
         appdelegate.syncDateTime = [NSString stringWithFormat:@"Yesterday %@ %@",seperateString[1],seperateString[2]];
     }
-    
+
     [dateString setTitle:appdelegate.syncDateTime forState:UIControlStateNormal];
-    [appdelegate.DBhandle getproductsdetails:appdelegate.userid];
+    [appdelegate.DBhandle getproductsdetails];
     [productListTable reloadData];
     [spinner stopAnimating];
     UIView *view=[self.view viewWithTag:8887];
     [view removeFromSuperview];
     
 }
+-(void)syncCall
+{
+    //Update customer info
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString  *documentsDirectory = [paths objectAtIndex:0];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString  *filePath;
+    filePath = [NSString stringWithFormat:@"%@/custmr.txt",documentsDirectory];
+    NSString *stringURL = [NSString stringWithFormat:@"%@custmr.txt",FILE_URL];
+    NSURL  *url = [NSURL URLWithString:stringURL];
+    NSData *urlData = [NSData dataWithContentsOfURL:url];
+    if (urlData)
+    {
+        [urlData writeToFile:filePath atomically:YES];
+    }
+
+
+
+    //update product details...
+
+    [appdelegate.DBhandle updateUser_Product];
+
+  paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    documentsDirectory = [paths objectAtIndex:0];
+   fileManager = [NSFileManager defaultManager];
+
+    filePath = [NSString stringWithFormat:@"%@/%@-Invntry.txt",documentsDirectory,appdelegate.warehousecode];
+
+    stringURL =[NSString stringWithFormat:@"%@%@-Invntry.txt",FILE_URL,appdelegate.warehousecode];
+    url = [NSURL URLWithString:stringURL];
+    urlData = [NSData dataWithContentsOfURL:url];
+    if (urlData)
+    {
+        [urlData writeToFile:filePath atomically:YES];
+    }
+
+    //--- READ CONTENT FROM customer.txt in Documents DIRECTORY....
+    NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    NSArray *arr = [fileContent componentsSeparatedByString:@"\n"];
+
+    NSLog(@"arr : %@", arr);
+   appdelegate.SyncprodArray = [[NSMutableArray alloc] init];
+
+    ProductItem *pitem = [[ProductItem alloc] init];
+
+    for (NSInteger i = 0; i < [arr count]; i++)
+    {
+        NSArray *tArr = [[arr objectAtIndex:i] componentsSeparatedByString:@"|"];
+        NSLog(@"tArr :%@",tArr);
+        pitem = [[ProductItem alloc] init];
+        NSString *tempStr;
+        for (NSInteger j = 0; j < [tArr count]; j++)
+        {
+            tempStr = [tArr objectAtIndex:j];
+            NSString *tStr = [tempStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+            tStr = [tStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+            NSLog(@"tStr :%@",tStr);
+            if (j == 0)
+            {
+                NSLog(@"j == 0 ->>> %@", tStr);
+                pitem.ownercode = tStr;
+
+            }
+            else if (j == 1)
+            {
+                pitem.warehousecode = tStr;
+                //[tDict setValue:tStr forKey:@"WarehouseCode"];
+            }
+            else if (j == 2)
+            {
+                pitem.productcode = tStr;
+
+                //[tDict setValue:tStr forKey:@"ProductCode"];
+            }
+            else if (j == 3)
+            {
+                pitem.proddescription = tStr;
+                // [tDict setValue:tStr forKey:@"ProductDesc"];
+            }
+            else if (j == 4)
+            {
+                pitem.StdPackDet = tStr;
+                NSLog(@"StdPackDet ->>> %@", tStr);
+                //  [tDict setValue:tStr forKey:@"StdPackDet"];
+            }
+            else if (j == 5)
+            {
+                pitem.productuom = tStr;
+                NSLog(@"ProductUOM ->>> %@", tStr);
+
+                // [tDict setValue:tStr forKey:@"ProductUOM"];
+            }
+            else if (j == 6)
+            {
+                // 2018
+                tStr = [tStr stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+                tStr = [tStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+                NSLog(@"QuantityAvail ->>> %@", tStr);
+                pitem.quantity = [tStr intValue];
+                //[tDict setValue:tStr forKey:@"QuantityAvail"];
+            }
+
+        }
+        if(pitem.productcode != NULL)
+            [appdelegate.SyncprodArray  addObject:pitem];
+    }
+
+    for(int i=0;i<appdelegate.SyncprodArray.count;i++)
+    {
+        ProductItem *item =[[ProductItem alloc]init];
+        item = [appdelegate.SyncprodArray  objectAtIndex:i];
+        //[DBhandle adduserdetails:item user_id:userid];
+        [appdelegate.DBhandle adduserdetails:item];
+        [appdelegate.DBhandle addproductsdetails:item];
+    }
+    //[DBhandle deleteStatusWithOne:userid];
+
+    [appdelegate.DBhandle deleteStatusWithOne];
+    [appdelegate.DBhandle sync];
+    [appdelegate.DBhandle getsynctime];
+    
+//     [DBhandle sync:userid];
+//     [DBhandle getsynctime:userid];
+    
+    
+    [[NSUserDefaults standardUserDefaults] setValue:appdelegate.syncDateTime forKey:@"datetime"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+  
+    appdelegate.syncDateTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"datetime"];
+    
+   
+   // NSLog(@"SyncprodArray :%@",appdelegate.SyncprodArray);
+    for(int i=0;i<appdelegate.SyncprodArray.count;i++)
+    {
+        ProductItem *item =[[ProductItem alloc]init];
+        item = [appdelegate.SyncprodArray objectAtIndex:i];
+        NSString *ImagePath = [NSString stringWithFormat:@"%@/%@.jpg",documentsDirectory,item.productcode];
+        if(![fileManager fileExistsAtPath: ImagePath])
+        {
+            NSLog(@"file :%@ not exists",item.productcode);
+            [spinner stopAnimating];
+                UIView *view=[self.view viewWithTag:8887];
+                [view removeFromSuperview];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"There are Product Photos to be downloaded. Proceed ?" message:@"" delegate:self cancelButtonTitle:@"Proceed" otherButtonTitles:@"Later", nil];
+            [alert show];
+            break;
+            
+            
+        }
+    }
+}
+
 -(void) createSpinnerView
 {
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
@@ -705,16 +960,78 @@ return 0;
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     if (buttonIndex==0) {
+        if(isImageDownloadComplete==NO)
+        {
        if(isLogout)
        {
         ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
         [self presentViewController:vc animated:YES completion:nil];
        }
-        
+        else
+        {
+            NSLog(@"image downloading");
+            [self createSpinnerView];
+            [self performSelector:@selector(callImageDownload) withObject:self afterDelay:0.1];
+            
+        }
+        }
     }
     else
     {
         isLogout = NO;
     }
+}
+-(void)callImageDownload
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString  *documentsDirectory = [paths objectAtIndex:0];
+    
+    for(int i=0;i<appdelegate.SyncprodArray.count;i++)
+    {
+        ProductItem *item =[[ProductItem alloc]init];
+        item = [appdelegate.SyncprodArray objectAtIndex:i];
+        NSString *ImagePath = [NSString stringWithFormat:@"%@/%@.jpg",documentsDirectory,item.productcode];
+        UIImage *imagefromServer   = [self getImageFromURL:[NSString stringWithFormat:@"%@%@.jpg",FILE_URL,item.productcode]];
+        [UIImageJPEGRepresentation(imagefromServer, 1.0) writeToFile:ImagePath options:NSAtomicWrite error:nil];
+    }
+    
+    [appdelegate.DBhandle sync];
+    [appdelegate.DBhandle getsynctime];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mm a"];
+    
+    
+    BOOL today = [[NSCalendar currentCalendar] isDateInToday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
+    NSArray *seperateString = [appdelegate.syncDateTime componentsSeparatedByString:@" "];
+    
+    if(today)
+    {
+        appdelegate.syncDateTime = [NSString stringWithFormat:@"Today %@ %@",seperateString[1],seperateString[2]];
+    }
+    BOOL yesterday = [[NSCalendar currentCalendar] isDateInYesterday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
+    
+    NSLog(@"date :%d",yesterday);
+    
+    if(yesterday)
+    {
+        
+        appdelegate.syncDateTime = [NSString stringWithFormat:@"Yesterday %@ %@",seperateString[1],seperateString[2]];
+    }
+
+    [dateString setTitle:appdelegate.syncDateTime forState:UIControlStateNormal];
+    [spinner stopAnimating];
+    UIView *view=[self.view viewWithTag:8887];
+    [view removeFromSuperview];
+    isImageDownloadComplete = YES;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Images downloaded succesfully" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    
+}
+-(UIImage *) getImageFromURL:(NSString *)fileURL
+{
+    UIImage * result;
+    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
+    result = [UIImage imageWithData:data];
+    return result;
 }
 @end

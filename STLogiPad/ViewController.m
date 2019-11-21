@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "CartViewController.h"
 #import "AppDelegate.h"
+#import "customerItem.h"
 
 @interface ViewController ()
 {
@@ -47,15 +48,41 @@
     
      appdelegate.islogin = YES;
     //loginBtn.selected = YES;
-     [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"login"];
-     [[NSUserDefaults standardUserDefaults] setValue:_username.text forKey:@"username"];
-     [[NSUserDefaults standardUserDefaults] synchronize];
-     
     
-    appdelegate.userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+     
+    BOOL isFound = NO;
+    
+    
+     for (NSInteger j = 0; j < [appdelegate.customerArray count]; j++)
+     {
+         customerItem *custItem = [appdelegate.customerArray objectAtIndex:j];
+         
+          if ([_username.text caseInsensitiveCompare:custItem.CustCode] == NSOrderedSame && [_password.text isEqual:custItem.AuthCode])
+          {
+              isFound = YES;
+              [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"login"];
+              [[NSUserDefaults standardUserDefaults] setValue:custItem.CustCode forKey:@"username"];
+               [[NSUserDefaults standardUserDefaults] setValue:custItem.warehousecode forKey:@"warehousecode"];
+               [[NSUserDefaults standardUserDefaults] setValue:custItem.EmailAddr forKey:@"email"];
+               [[NSUserDefaults standardUserDefaults] setValue:custItem.CcAddr forKey:@"cc"];
+              [[NSUserDefaults standardUserDefaults] synchronize];
+              appdelegate.warehousecode = custItem.warehousecode;
+              appdelegate.userid = custItem.CustCode;
+              appdelegate.emailaddr = custItem.EmailAddr;
+              appdelegate.ccaddr = custItem.CcAddr;
+              
+              [self createSpinnerView];
+              [self performSelector:@selector(callFunc) withObject:self afterDelay:0.1];
+              break;
+          }
+     }
+    
+   if(!isFound)
+   {
+       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid username/Password" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
+       [alert show];
+   }
    
-    [self createSpinnerView];
-    [self performSelector:@selector(callFunc) withObject:self afterDelay:0.1];
     
     
     
@@ -63,6 +90,10 @@
 -(void)callFunc
 {
     [appdelegate getcustProducts];
+    
+    [spinner stopAnimating];
+    UIView *view=[self.view viewWithTag:8887];
+    [view removeFromSuperview];
     
     
     CartViewController *cv = [self.storyboard instantiateViewControllerWithIdentifier:@"CartViewController"];

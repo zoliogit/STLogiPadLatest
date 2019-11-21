@@ -17,16 +17,18 @@
 
 @property DBHandler *DBhandle;
 @property (strong, nonatomic) UIWindow *window;
-@property NSString *SelProdCode, *userid, *syncDateTime;
+@property NSString *SelProdCode, *userid, *syncDateTime, *warehousecode, *emailaddr, *ccaddr;
 @property NSMutableArray *prodArray;
 @property NSMutableArray *cartArray;
 @property NSMutableArray *favArray;
 @property ProductItem *SelectedpItem;
 @property int currentOrderId;
-@property NSMutableArray *orderArray, *orderDetailsArray;
+@property NSMutableArray *orderArray, *orderDetailsArray, *SyncprodArray;
 @property BOOL islogin,isFromQR;
+@property (nonatomic, retain) NSMutableArray *customerArray;
 
 -(void)getcustProducts;
+
 
 @end
 

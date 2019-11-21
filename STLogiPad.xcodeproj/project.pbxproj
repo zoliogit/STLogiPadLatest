@@ -35,6 +35,7 @@
 		8C8D0350231280E500AD8AA6 /* ProdDescViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D034F231280E500AD8AA6 /* ProdDescViewController.m */; };
 		8C8D03532312B70600AD8AA6 /* CartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D03522312B70600AD8AA6 /* CartViewController.m */; };
 		8CA3C9E423138BC0008B87D1 /* CartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3C9E323138BC0008B87D1 /* CartTableViewCell.m */; };
+		8CC273CB23A9D80200A1AB7C /* customerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC273CA23A9D80200A1AB7C /* customerItem.m */; };
 		8CD5AF262355AF1B00B4279C /* DBHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5AF242355AF1800B4279C /* DBHandler.m */; };
 		8CD5AF282355B1A400B4279C /* ST.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5AF272355B1A400B4279C /* ST.sqlite */; };
 		8CD5AF2A2355B22300B4279C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD5AF292355B22300B4279C /* libsqlite3.tbd */; };
@@ -126,6 +127,8 @@
 		8C8D03522312B70600AD8AA6 /* CartViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CartViewController.m; sourceTree = "<group>"; };
 		8CA3C9E223138BC0008B87D1 /* CartTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CartTableViewCell.h; sourceTree = "<group>"; };
 		8CA3C9E323138BC0008B87D1 /* CartTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CartTableViewCell.m; sourceTree = "<group>"; };
+		8CC273C923A9D80200A1AB7C /* customerItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = customerItem.h; sourceTree = "<group>"; };
+		8CC273CA23A9D80200A1AB7C /* customerItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = customerItem.m; sourceTree = "<group>"; };
 		8CD5AF242355AF1800B4279C /* DBHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHandler.m; sourceTree = "<group>"; };
 		8CD5AF252355AF1A00B4279C /* DBHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHandler.h; sourceTree = "<group>"; };
 		8CD5AF272355B1A400B4279C /* ST.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ST.sqlite; sourceTree = "<group>"; };
@@ -303,6 +306,8 @@
 				8CF91849230EEBFE003824A8 /* Main.storyboard */,
 				8C3075062358168B0001B242 /* ProductItem.h */,
 				8C3075072358168B0001B242 /* ProductItem.m */,
+				8CC273C923A9D80200A1AB7C /* customerItem.h */,
+				8CC273CA23A9D80200A1AB7C /* customerItem.m */,
 				8CD5AF252355AF1A00B4279C /* DBHandler.h */,
 				8CD5AF242355AF1800B4279C /* DBHandler.m */,
 				8CE49BA4233EA7D8004ECB48 /* FavTableViewCell.h */,
@@ -509,6 +514,7 @@
 				8CD5AF262355AF1B00B4279C /* DBHandler.m in Sources */,
 				8C8D0350231280E500AD8AA6 /* ProdDescViewController.m in Sources */,
 				8CF91853230EEBFE003824A8 /* main.m in Sources */,
+				8CC273CB23A9D80200A1AB7C /* customerItem.m in Sources */,
 				8C4B5CF9233D4CE800C968EB /* OrderStatusTableViewCell.m in Sources */,
 				8CE49BA6233EA7D8004ECB48 /* FavTableViewCell.m in Sources */,
 				8CA3C9E423138BC0008B87D1 /* CartTableViewCell.m in Sources */,
