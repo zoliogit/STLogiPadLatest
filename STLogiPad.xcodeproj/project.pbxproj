@@ -427,7 +427,7 @@
 				TargetAttributes = {
 					8CF9183F230EEBFE003824A8 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					8CF91857230EEBFF003824A8 = {
 						CreatedOnToolsVersion = 9.2;
@@ -687,8 +687,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Nanoveu Pte Ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T5QTE45W29;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = STLogiPad/Info.plist;
@@ -700,8 +700,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanoveu.ent.STLogiPad;
 				PRODUCT_NAME = MedOrder;
-				PROVISIONING_PROFILE = "0de774ff-1d8c-4532-9bba-666578b987a0";
-				PROVISIONING_PROFILE_SPECIFIER = "STLogiPad profile";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = " arm64 armv7 armv7s";
 			};
@@ -712,8 +712,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Nanoveu Pte Ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T5QTE45W29;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = STLogiPad/Info.plist;
@@ -725,8 +725,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanoveu.ent.STLogiPad;
 				PRODUCT_NAME = MedOrder;
-				PROVISIONING_PROFILE = "0de774ff-1d8c-4532-9bba-666578b987a0";
-				PROVISIONING_PROFILE_SPECIFIER = "STLogiPad profile";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = " arm64 armv7 armv7s";
 			};
