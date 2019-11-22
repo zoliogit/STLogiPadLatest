@@ -20,19 +20,49 @@
 @end
 
 @implementation orderDetailsViewController
+@synthesize dateTimeString;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [backBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
-   backBtn.showsTouchWhenHighlighted = YES;
+     backBtn.showsTouchWhenHighlighted = YES;
     
     [ReorderBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
     ReorderBtn.showsTouchWhenHighlighted = YES;
     
-     appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mma"];
+    
+    
+    BOOL today = [[NSCalendar currentCalendar] isDateInToday:[dateFormatter dateFromString:dateTimeString]];
+    
+    NSArray *seperateString = [dateTimeString componentsSeparatedByString:@" "];
+    
+    if(today)
+    {
+        NSLog(@"inside today");
+        
+        dateTimeString = [NSString stringWithFormat:@"Today %@",seperateString[1]];
+    }
+    else
+    {
+        BOOL yesterday = [[NSCalendar currentCalendar] isDateInYesterday:[dateFormatter dateFromString:dateTimeString]];
+        
+        NSLog(@"inside yest");
+        
+        if(yesterday)
+        {
+            
+            dateTimeString = [NSString stringWithFormat:@"Yesterday %@",seperateString[1]];
+        }
+    }
+    
+    [dateTime setTitle:dateTimeString forState:UIControlStateNormal];
     // Do any additional setup after loading the view.
 }
 

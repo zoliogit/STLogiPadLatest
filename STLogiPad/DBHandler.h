@@ -43,7 +43,7 @@
 -(void)getcart:(NSString*)username;
 -(void)updatecart:(ProductItem*)PSelectItem userid:(NSString*)username;
 -(void)deletefromcart:(ProductItem *)PSelectItem userid:(NSString*)username;
--(void)addToFav:(ProductItem*)PSelectItem userid:(NSString*)username;
+-(BOOL)addToFav:(ProductItem*)PSelectItem userid:(NSString*)username;
 -(void)getfav:(NSString*)username;
 -(void)deletefromfav:(ProductItem *)PSelectItem userid:(NSString*)username;
 

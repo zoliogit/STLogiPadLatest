@@ -225,16 +225,14 @@
     }
     sqlite3_finalize(DeleteStmt);
     sqlite3_stmt *InsertStmt;
-    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mm a"];
-    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-    NSString *querySQLInsert = [NSString stringWithFormat:@"INSERT INTO sync(sync_datetime) VALUES(?)"];
+    NSString *querySQLInsert = [NSString stringWithFormat:@"INSERT INTO sync(sync_datetime) VALUES(datetime('now', 'localtime'))"];
+    NSLog(@"querySQLInsert:%@",querySQLInsert);
     const char *query_stmt_Insert= [querySQLInsert UTF8String];
     if(sqlite3_prepare_v2(database, query_stmt_Insert, -1, &InsertStmt, NULL)!= SQLITE_OK)
         NSLog(@"Error while creating add statement. '%s'", sqlite3_errmsg(database));
     else
     {
-       sqlite3_bind_text(InsertStmt, 1, [dateString UTF8String], -1, SQLITE_TRANSIENT);
+       
     }
     if(SQLITE_DONE != sqlite3_step(InsertStmt))
         NSLog(@"Error while inserting result data. '%s'", sqlite3_errmsg(database));
@@ -260,6 +258,17 @@
             thisApp.syncDateTime = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,0)];
         }
     }
+    
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *myDate =[dateFormatter dateFromString:thisApp.syncDateTime];
+    
+    dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mma"];
+    thisApp.syncDateTime = [dateFormatter stringFromDate:myDate];
+    
+    
+    NSLog(@"Timmeee  ::::::::::%@",thisApp.syncDateTime);
 }
 //-(void)getsynctime:(NSString*)username
 //{
@@ -372,8 +381,24 @@
     }
 }
 
--(void)addToFav:(ProductItem*)PSelectItem userid:(NSString*)username
+-(BOOL)addToFav:(ProductItem*)PSelectItem userid:(NSString*)username
 {
+    sqlite3_stmt *selectStmt;
+    const char *query_stmt_Select;
+    BOOL isAlready = 0;
+    NSString *querySelect = [NSString stringWithFormat:@"select * from favourites where products_id = '%@' and user_id = '%@'",PSelectItem.productcode,username];
+    query_stmt_Select = [querySelect UTF8String];
+    if (sqlite3_prepare_v2(database, query_stmt_Select, -1, &selectStmt, NULL) == SQLITE_OK)
+    {
+        while (sqlite3_step(selectStmt) == SQLITE_ROW)
+        {
+            
+            isAlready = 1;
+            NSLog(@"isAlready :%d",isAlready);
+        }
+    }
+    if(!isAlready)
+    {
     sqlite3_stmt *InsertStmt;
     NSString *querySQLInsert = [NSString stringWithFormat:@"INSERT INTO favourites(products_id,user_id) VALUES(?,?)"];
     const char *query_stmt_Insert= [querySQLInsert UTF8String];
@@ -394,7 +419,11 @@
         NSLog(@"fav details saved");
         
     }
+    
     sqlite3_finalize(InsertStmt);
+    }
+    
+    return isAlready;
 }
 -(BOOL)addToCart:(ProductItem*)PSelectItem userid:(NSString*)username
 {
@@ -485,8 +514,7 @@
     NSLog(@"queryselect :%@",querySelect);
     query_stmt_Select = [querySelect UTF8String];
     NSMutableDictionary *dict;
-    int count = 1;
-    if (sqlite3_prepare_v2(database, query_stmt_Select, -1, &selectStmt, NULL) == SQLITE_OK)
+        if (sqlite3_prepare_v2(database, query_stmt_Select, -1, &selectStmt, NULL) == SQLITE_OK)
     {
         while (sqlite3_step(selectStmt) == SQLITE_ROW)
         {
@@ -552,8 +580,14 @@
 {
     AppDelegate *thisApp = (AppDelegate *)[UIApplication sharedApplication].delegate;
     sqlite3_stmt *InsertStmt;
+    
+    
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mm a"];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mma"];
+   
+    
+    
+    
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     NSLog(@"dateString:%@",dateString);
     NSString *querySQLInsert = [NSString stringWithFormat:@"INSERT INTO order_status(user_id,totalItems,date_time,status_order) VALUES(?,?,?,?)"];

@@ -80,7 +80,7 @@
     
     orderBtn.showsTouchWhenHighlighted = YES;
     
-   
+    _searchBar.hidden = YES;
     
     appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     
@@ -100,44 +100,13 @@
     
      [loggedBtn setTitle:[NSString stringWithFormat:@"Logged in as %@:",appdelegate.userid] forState:UIControlStateNormal];
     
-    //favTable.allowsMultipleSelection = YES;
-  //  favCartBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    //[button addTarget:self
-              // action:@selector(aMethod:)
-     //forControlEvents:UIControlEventTouchUpInside];
-    //[favCartBtn setTitle:@"Add to Cart" forState:UIControlStateNormal];
-    
+  
     
      //[appdelegate.DBhandle getproductsdetails:appdelegate.userid];
     
+    
     [appdelegate.DBhandle getproductsdetails];
-    
-    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mm a"];
-    
-    
-     BOOL today = [[NSCalendar currentCalendar] isDateInToday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
-    NSArray *seperateString = [appdelegate.syncDateTime componentsSeparatedByString:@" "];
-    
-    if(today)
-    {
-        appdelegate.syncDateTime = [NSString stringWithFormat:@"Today %@ %@",seperateString[1],seperateString[2]];
-    }
-    else
-    {
-    BOOL yesterday = [[NSCalendar currentCalendar] isDateInYesterday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
-    
-    NSLog(@"date :%d",yesterday);
-    
-    if(yesterday)
-    {
-        
-        appdelegate.syncDateTime = [NSString stringWithFormat:@"Yesterday %@ %@",seperateString[1],seperateString[2]];
-    }
-    }
-    
-     [dateString setTitle:appdelegate.syncDateTime forState:UIControlStateNormal];
-     [cartTable reloadData];
+    [cartTable reloadData];
     
      productListPopOverViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProductListPopOverViewController"];
     
@@ -147,6 +116,33 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mma"];
+    
+    
+    BOOL today = [[NSCalendar currentCalendar] isDateInToday:[dateFormatter dateFromString:appdelegate. syncDateTime]];
+    
+    NSArray *seperateString = [appdelegate.syncDateTime componentsSeparatedByString:@" "];
+    
+    if(today)
+    {
+        NSLog(@"inside today");
+        
+        appdelegate.syncDateTime = [NSString stringWithFormat:@"Today %@",seperateString[1]];
+    }
+    else
+    {
+        BOOL yesterday = [[NSCalendar currentCalendar] isDateInYesterday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
+        
+        NSLog(@"inside yest");
+        
+        if(yesterday)
+        {
+            
+            appdelegate.syncDateTime = [NSString stringWithFormat:@"Yesterday %@",seperateString[1]];
+        }
+    }
+     [dateString setTitle:appdelegate.syncDateTime forState:UIControlStateNormal];
     [appdelegate.DBhandle getcart:appdelegate.userid];
     [appdelegate.DBhandle getfav:appdelegate.userid];
     NSLog(@"prodArray:%@",appdelegate.prodArray);
@@ -223,6 +219,7 @@ return 0;
 {
     if(tableView == cartTable)
     {
+        
         static NSString *CellIdentifier = @"CartTableViewCell";
         CartTableViewCell *cell = (CartTableViewCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];//dequeing cell from tableview. And if it is nil, initialize new cell instance
         if (cell == nil){
@@ -310,6 +307,24 @@ return 0;
     }
     
     
+    
+}
+- (UITableViewCellEditingStyle)tableView:(UITableView *)TableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(TableView == productListTable)
+    {
+        return UITableViewCellEditingStyleNone;
+        
+    }
+    if(TableView  == cartTable)
+    {
+        
+        return UITableViewCellEditingStyleNone;
+        
+    }
+    
+   else
+       return UITableViewCellEditingStyleDelete;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -380,7 +395,7 @@ return 0;
     // Pass the selected object to the new view controller.
 }
 */
--(IBAction)ChckBtnPressed:(id)sender
+-(IBAction)ChckBtnPressed:(id)sender //
 {
      UIButton *tempBtn=(UIButton *) sender;
     ProductItem *pitem = [[ProductItem alloc] init];
@@ -405,16 +420,20 @@ return 0;
 {
     productsBtn.selected = YES;
     
+    popoverController = [[UIPopoverController alloc] initWithContentViewController:productListPopOverViewController];
+    popoverController.delegate = self;
+    
+   // [FavCartBtn removeFromSuperview];
+    FavCartBtn.hidden = YES;
+    
     productListTable.hidden = NO;
-    productListTable.frame = CGRectMake(0, 0, 400, 460);
+    productListTable.frame = CGRectMake(0,50, 400, 460);
+    
+    _searchBar.hidden = NO;
+    _searchBar.frame = CGRectMake(0,0, 400, 44);
+    [productListPopOverViewController.view addSubview:_searchBar];
         
-     if (!popoverController) {
-         
-         
-         popoverController = [[UIPopoverController alloc] initWithContentViewController:productListPopOverViewController];
-         popoverController.delegate = self;
-         
-     }
+    
     [productListPopOverViewController.view addSubview:productListTable];
     
     
@@ -513,19 +532,7 @@ return 0;
 
 
 
-//- (void)imagePickerController:(UIImagePickerController *)picker
-//        didFinishPickingImage:(UIImage *)image
-//                  editingInfo:(NSDictionary *)editingInfo
-//{
-//    //imageView.image = image;
-//    [picker dismissViewControllerAnimated:YES completion:nil];
-//
-//
-//}
-//-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-//{
-//    [self dismissModalViewControllerAnimated:YES];
-//}
+
 
 
 
@@ -535,22 +542,23 @@ return 0;
 
 - (IBAction)FavbtnClicked:(id)sender {
     
+    
+    popoverController = [[UIPopoverController alloc] initWithContentViewController:productListPopOverViewController];
+    popoverController.delegate = self;
+    
     favBtn.selected = YES;
     NSLog(@"app;%@",appdelegate.favArray);
+    
     [productListTable removeFromSuperview];
+    [_searchBar removeFromSuperview];
+    
     favTable.hidden = NO;
-    favTable.frame = CGRectMake(0,60, 400, 460);
+    favTable.frame = CGRectMake(0,60, 450, 400);
     FavCartBtn.hidden = NO;
-   FavCartBtn.frame = CGRectMake(225,10, 160, 40);
+    FavCartBtn.frame = CGRectMake(275,10, 160, 40);
     [productListPopOverViewController.view addSubview:FavCartBtn];
 
-    if (!popoverController) {
 
-
-        popoverController = [[UIPopoverController alloc] initWithContentViewController:productListPopOverViewController];
-        popoverController.delegate = self;
-
-    }
    
     [productListPopOverViewController.view addSubview:favTable];
 
@@ -594,15 +602,15 @@ return 0;
         {
           ProductItem *pitem = [[ProductItem alloc] init];
           pitem = [appdelegate.cartArray objectAtIndex:i];
-          messageBody = [messageBody stringByAppendingFormat:@"<tr align='center'><td>"];
+          messageBody = [messageBody stringByAppendingFormat:@"<tr><td align='center'>"];
           messageBody = [messageBody stringByAppendingFormat:@"%d",i+1];
-          messageBody = [messageBody stringByAppendingFormat:@"</td><td>"];
+          messageBody = [messageBody stringByAppendingFormat:@"</td><td align='center'>"];
           messageBody = [messageBody stringByAppendingFormat:@"%@",pitem.productcode];
-          messageBody = [messageBody stringByAppendingFormat:@"</td><td>"];
+          messageBody = [messageBody stringByAppendingFormat:@"</td> <td>"];
           messageBody = [messageBody stringByAppendingFormat:@"%@",pitem.proddescription];
-          messageBody = [messageBody stringByAppendingFormat:@"</td><td>"];
+          messageBody = [messageBody stringByAppendingFormat:@"</td><td align='center'>"];
           messageBody = [messageBody stringByAppendingFormat:@"%@",pitem.productuom];
-          messageBody = [messageBody stringByAppendingFormat:@"</td><td>"];
+          messageBody = [messageBody stringByAppendingFormat:@"</td><td align='center'>"];
           messageBody = [messageBody stringByAppendingFormat:@"%d",pitem.quantity];
           messageBody = [messageBody stringByAppendingFormat:@"</td></tr>"];
             if (i == [appdelegate.cartArray count]) {
@@ -630,6 +638,9 @@ return 0;
     else
     {
         NSLog(@"This device cannot send email");
+        isImageDownloadComplete = YES;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"This device cannot send email" message:@"Please configure it" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
     }
     
 }
@@ -652,6 +663,7 @@ return 0;
             
             [appdelegate.cartArray removeAllObjects];
             [cartTable reloadData];
+            isImageDownloadComplete = YES;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email sent!" message:@"The orders email have been sent successfully!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
             break;
@@ -675,8 +687,7 @@ return 0;
 
 - (IBAction)LogoutBtnPressed:(id)sender {
     
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"login"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     
     isLogout=YES;
     UIAlertView *tmp = [[UIAlertView alloc]
@@ -752,26 +763,31 @@ return 0;
     [self syncCall];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mm a"];
-
-
-    BOOL today = [[NSCalendar currentCalendar] isDateInToday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mma"];
+    
+    
+    BOOL today = [[NSCalendar currentCalendar] isDateInToday:[dateFormatter dateFromString:appdelegate. syncDateTime]];
+    
     NSArray *seperateString = [appdelegate.syncDateTime componentsSeparatedByString:@" "];
-
+    
     if(today)
     {
-        appdelegate.syncDateTime = [NSString stringWithFormat:@"Today %@ %@",seperateString[1],seperateString[2]];
+        NSLog(@"inside today");
+        
+        appdelegate.syncDateTime = [NSString stringWithFormat:@"Today %@",seperateString[1]];
     }
-    BOOL yesterday = [[NSCalendar currentCalendar] isDateInYesterday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
-
-    NSLog(@"date :%d",yesterday);
-
-    if(yesterday)
+    else
     {
-
-        appdelegate.syncDateTime = [NSString stringWithFormat:@"Yesterday %@ %@",seperateString[1],seperateString[2]];
+        BOOL yesterday = [[NSCalendar currentCalendar] isDateInYesterday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
+        
+        NSLog(@"inside yest");
+        
+        if(yesterday)
+        {
+            
+            appdelegate.syncDateTime = [NSString stringWithFormat:@"Yesterday %@",seperateString[1]];
+        }
     }
-
     [dateString setTitle:appdelegate.syncDateTime forState:UIControlStateNormal];
     [appdelegate.DBhandle getproductsdetails];
     [productListTable reloadData];
@@ -925,6 +941,8 @@ return 0;
             [spinner stopAnimating];
                 UIView *view=[self.view viewWithTag:8887];
                 [view removeFromSuperview];
+            isImageDownloadComplete = NO;
+            isLogout = NO;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"There are Product Photos to be downloaded. Proceed ?" message:@"" delegate:self cancelButtonTitle:@"Proceed" otherButtonTitles:@"Later", nil];
             [alert show];
             break;
@@ -964,6 +982,8 @@ return 0;
         {
        if(isLogout)
        {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"login"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
         [self presentViewController:vc animated:YES completion:nil];
        }
@@ -985,39 +1005,47 @@ return 0;
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString  *documentsDirectory = [paths objectAtIndex:0];
-    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     for(int i=0;i<appdelegate.SyncprodArray.count;i++)
     {
         ProductItem *item =[[ProductItem alloc]init];
         item = [appdelegate.SyncprodArray objectAtIndex:i];
         NSString *ImagePath = [NSString stringWithFormat:@"%@/%@.jpg",documentsDirectory,item.productcode];
+        if(![fileManager fileExistsAtPath: ImagePath])
+        {
         UIImage *imagefromServer   = [self getImageFromURL:[NSString stringWithFormat:@"%@%@.jpg",FILE_URL,item.productcode]];
         [UIImageJPEGRepresentation(imagefromServer, 1.0) writeToFile:ImagePath options:NSAtomicWrite error:nil];
+        }
     }
     
     [appdelegate.DBhandle sync];
     [appdelegate.DBhandle getsynctime];
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mm a"];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mma"];
     
     
-    BOOL today = [[NSCalendar currentCalendar] isDateInToday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
+    BOOL today = [[NSCalendar currentCalendar] isDateInToday:[dateFormatter dateFromString:appdelegate. syncDateTime]];
+    
     NSArray *seperateString = [appdelegate.syncDateTime componentsSeparatedByString:@" "];
     
     if(today)
     {
-        appdelegate.syncDateTime = [NSString stringWithFormat:@"Today %@ %@",seperateString[1],seperateString[2]];
-    }
-    BOOL yesterday = [[NSCalendar currentCalendar] isDateInYesterday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
-    
-    NSLog(@"date :%d",yesterday);
-    
-    if(yesterday)
-    {
+        NSLog(@"inside today");
         
-        appdelegate.syncDateTime = [NSString stringWithFormat:@"Yesterday %@ %@",seperateString[1],seperateString[2]];
+        appdelegate.syncDateTime = [NSString stringWithFormat:@"Today %@",seperateString[1]];
     }
-
+    else
+    {
+        BOOL yesterday = [[NSCalendar currentCalendar] isDateInYesterday:[dateFormatter dateFromString:appdelegate.syncDateTime]];
+        
+        NSLog(@"inside yest");
+        
+        if(yesterday)
+        {
+            
+            appdelegate.syncDateTime = [NSString stringWithFormat:@"Yesterday %@",seperateString[1]];
+        }
+    }
     [dateString setTitle:appdelegate.syncDateTime forState:UIControlStateNormal];
     [spinner stopAnimating];
     UIView *view=[self.view viewWithTag:8887];

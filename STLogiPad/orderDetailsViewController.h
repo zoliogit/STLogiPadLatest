@@ -11,9 +11,11 @@
 @interface orderDetailsViewController : UIViewController
 {
     
+    __weak IBOutlet UIButton *dateTime;
     __weak IBOutlet UIButton *ReorderBtn;
     __weak IBOutlet UIButton *backBtn;
 }
+@property NSString* dateTimeString;
 - (IBAction)backBtnPressed:(id)sender;
 - (IBAction)ReorderBtnPressed:(id)sender;
 

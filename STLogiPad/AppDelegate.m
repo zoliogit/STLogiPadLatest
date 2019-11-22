@@ -32,7 +32,6 @@
     favArray = [[NSMutableArray alloc]init];
     orderArray = [[NSMutableArray alloc]init];
     orderDetailsArray = [[NSMutableArray alloc]init];
-  
     
     [self getcustinfo];
      if([[NSUserDefaults standardUserDefaults] objectForKey:@"login"])
@@ -47,12 +46,6 @@
          [self.window.rootViewController presentViewController:vc animated:YES completion:nil];
      }
     
-
-
-    
-    
-
-    
     return YES;
 }
 -(void)getcustinfo
@@ -64,7 +57,9 @@
     filePath = [NSString stringWithFormat:@"%@/custmr.txt",documentsDirectory];
     if(![fileManager fileExistsAtPath: filePath])
     {
-        NSString *stringURL = [NSString stringWithFormat:@"%@custmr.txt",FILE_URL];//[NSString stringWithFormat:@"custmr.txt"];
+        NSString *stringURL = [NSString stringWithFormat:@"%@custmr.txt",FILE_URL];
+        //[NSString stringWithFormat:@"custmr.txt"];
+        
         NSURL  *url = [NSURL URLWithString:stringURL];
         NSData *urlData = [NSData dataWithContentsOfURL:url];
         if (urlData)
@@ -259,7 +254,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:syncDateTime forKey:@"datetime"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-     else
+     else //file exists in file path
          
      {
         userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];

@@ -78,22 +78,7 @@
         }
     }
     
-    if(appdelegate.favArray.count >0)
-    {
-        for(int i=0;i<appdelegate.favArray.count;i++)
-        {
-            
-            ProductItem *pitem = [[ProductItem alloc] init];
-            pitem = [appdelegate.favArray objectAtIndex:i];
-            if([appdelegate.SelectedpItem.productcode isEqualToString:pitem.productcode])
-            {
-               favbtn.hidden = YES;
-            }
-            else
-                favbtn.hidden = NO;
-            
-        }
-    }
+   
     
     // Do any additional setup after loading the view.
 }
@@ -213,9 +198,17 @@
      favbtn.selected = YES;
     Isdelete = NO;
     appdelegate.SelectedpItem.quantity = [qtyLabel.text intValue];
-    [appdelegate.DBhandle addToFav:appdelegate.SelectedpItem userid:appdelegate.userid];
+    BOOL isAlready =[appdelegate.DBhandle addToFav:appdelegate.SelectedpItem userid:appdelegate.userid];
+    if(isAlready)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Product is already in Favourites" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
+        [alert show];
+    }
+     else
+     {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Product successfully added to favourites" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
     [alert show];
+     }
     
 }
 @end

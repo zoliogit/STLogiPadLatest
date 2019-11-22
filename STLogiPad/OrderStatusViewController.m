@@ -75,12 +75,13 @@
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     dict = [appdelegate.orderArray objectAtIndex:indexPath.row];
     cell.SlNo.text = [NSString stringWithFormat:@"%d", indexPath.row + 1];
+    
     NSString *dateTime = [dict objectForKey:@"date"];
     NSArray *seperateString = [dateTime componentsSeparatedByString:@" "];
    
-    NSArray *seperateTimeString = [seperateString[1] componentsSeparatedByString:@":"];
+    //NSArray *seperateTimeString = [seperateString[1] componentsSeparatedByString:@":"];
     cell.Date.text =  seperateString[0];
-    cell.time.text = [NSString stringWithFormat:@"%@:%@ %@",seperateTimeString [0],seperateTimeString[1],seperateString[2]];
+    cell.time.text = [NSString stringWithFormat:@"%@",seperateString[1]];
     cell.NoOfItems.text = [dict objectForKey:@"itemcount"];
     cell.Status.text = [dict objectForKey:@"status"];
    
@@ -93,6 +94,9 @@
     dict = [appdelegate.orderArray objectAtIndex:indexPath.row];
     [appdelegate.DBhandle getOrderdetails:[[dict objectForKey:@"orderid"] integerValue]];
     orderDetailsViewController *odv = [self.storyboard instantiateViewControllerWithIdentifier:@"orderDetailsViewController"];
+    NSString *dateTime = [dict objectForKey:@"date"];
+    NSArray *seperateString = [dateTime componentsSeparatedByString:@" "];
+    odv.dateTimeString =[NSString stringWithFormat:@"%@ %@",seperateString[0],seperateString[1]];
     [self presentViewController:odv animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
