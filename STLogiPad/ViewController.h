@@ -10,12 +10,17 @@
 
 @interface ViewController : UIViewController
 {
-    
+     NSString *ftpFromType;
     __weak IBOutlet UIButton *loginBtn;
 }
+
+@property (nonatomic, retain)   NSOutputStream *  networkStream;
+@property (nonatomic, retain)   NSInputStream *   fileStream;
+
 - (IBAction)LoginPressed:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UITextField *password;
+@property (weak, nonatomic) IBOutlet UILabel *buildNo;
 
 
 

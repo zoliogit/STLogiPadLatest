@@ -43,18 +43,23 @@
 -(void)getcart:(NSString*)username;
 -(void)updatecart:(ProductItem*)PSelectItem userid:(NSString*)username;
 -(void)deletefromcart:(ProductItem *)PSelectItem userid:(NSString*)username;
--(BOOL)addToFav:(ProductItem*)PSelectItem userid:(NSString*)username;
+-(BOOL)addToFav:(ProductItem*)PSelectItem userid:(NSString*)username pr:(int)par;
+
 -(void)getfav:(NSString*)username;
 -(void)deletefromfav:(ProductItem *)PSelectItem userid:(NSString*)username;
 
+-(void)imagesync;
+-(void)getimagesynctime;
 
-
--(void)addOrderStatus:(NSString*)username totalItm:(int)NoOfItem;
+-(void)addOrderStatus:(NSString*)username totalItm:(int)NoOfItem sts:(NSString*)Status;
 -(void)addOrderDetails;
 -(void)getOrderstatus:(NSString*)username;
 -(void)getOrderdetails:(int)order_id;
 
+-(void)addCSVValues :(NSString*)Prodid loc:(NSString*)location par:(int)PAR;
+-(void)deletecsvValues;
+-(void)getExcelPAR:(NSString*)username pid:(NSString*)prodid;
 
-
-
+-(void)deleteOrderstatus_detailsWithStatusPending:(int)orderId;
+-(void)addOrderDetailsFromPendingStatus;
 @end

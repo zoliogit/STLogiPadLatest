@@ -130,11 +130,55 @@
     else
     {
         
-        NSLog(@"user details saved");
+        //NSLog(@"user details saved");
         
     }
     sqlite3_finalize(InsertStmt);
 }
+-(void)deletecsvValues
+{
+        sqlite3_stmt *DeleteStmt;
+        NSString *querySQLDelete =  @"";
+        const char *query_stmt_Delete;
+        querySQLDelete = [NSString stringWithFormat:@"delete from PAR"];
+    
+        query_stmt_Delete= [querySQLDelete UTF8String];
+        if( sqlite3_prepare_v2(database,query_stmt_Delete, -1, &DeleteStmt, NULL) == SQLITE_OK )
+        {
+            sqlite3_step(DeleteStmt);
+        }
+        else
+        {
+            NSLog( @"Failed from sqlite3_prepare_v2. Error is:  %s", sqlite3_errmsg(database) );
+        }
+        sqlite3_finalize(DeleteStmt);
+}
+-(void)addCSVValues :(NSString*)Prodid loc:(NSString*)location par:(int)PAR
+{
+
+    sqlite3_stmt *InsertStmt;
+    NSString *querySQLInsert = [NSString stringWithFormat:@"INSERT INTO PAR(products_id,locations,par) VALUES(?,?,?)"];
+    const char *query_stmt_Insert= [querySQLInsert UTF8String];
+    
+    if(sqlite3_prepare_v2(database, query_stmt_Insert, -1, &InsertStmt, NULL)!= SQLITE_OK)
+        NSLog(@"Error while creating add statement. '%s'", sqlite3_errmsg(database));
+    else
+    {
+        sqlite3_bind_text(InsertStmt, 1, [Prodid UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(InsertStmt, 2, [location UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_int(InsertStmt, 3, PAR);
+    }
+    if(SQLITE_DONE != sqlite3_step(InsertStmt))
+        NSLog(@"Error while inserting result data. '%s'", sqlite3_errmsg(database));
+    else
+    {
+        
+        NSLog(@" details saved");
+        
+    }
+    sqlite3_finalize(InsertStmt);
+}
+
 
 //-(void)adduserdetails :(ProductItem*)Proditem user_id:(NSString*)username
 //{
@@ -206,7 +250,63 @@
 //    }
 //    sqlite3_finalize(InsertStmt);
 //}
-
+-(void)imagesync
+{
+    sqlite3_stmt *DeleteStmt;
+    NSString *querySQLDelete =  @"";
+    const char *query_stmt_Delete;
+    querySQLDelete = [NSString stringWithFormat:@"delete from imagesync"];
+    
+    query_stmt_Delete= [querySQLDelete UTF8String];
+    if( sqlite3_prepare_v2(database,query_stmt_Delete, -1, &DeleteStmt, NULL) == SQLITE_OK )
+    {
+        sqlite3_step(DeleteStmt);
+    }
+    else
+    {
+        NSLog( @"Failed from sqlite3_prepare_v2. Error is:  %s", sqlite3_errmsg(database) );
+    }
+    sqlite3_finalize(DeleteStmt);
+    sqlite3_stmt *InsertStmt;
+    NSString *querySQLInsert = [NSString stringWithFormat:@"INSERT INTO imagesync(imagesync_datetime) VALUES(datetime('now', 'localtime'))"];
+    NSLog(@"querySQLInsert:%@",querySQLInsert);
+    const char *query_stmt_Insert= [querySQLInsert UTF8String];
+    if(sqlite3_prepare_v2(database, query_stmt_Insert, -1, &InsertStmt, NULL)!= SQLITE_OK)
+        NSLog(@"Error while creating add statement. '%s'", sqlite3_errmsg(database));
+    else
+    {
+        
+    }
+    if(SQLITE_DONE != sqlite3_step(InsertStmt))
+        NSLog(@"Error while inserting result data. '%s'", sqlite3_errmsg(database));
+    else
+    {
+        
+        // NSLog(@"sync details saved");
+        
+    }
+    sqlite3_finalize(InsertStmt);
+}
+-(void)getimagesynctime
+{
+    sqlite3_stmt *selectStmt;
+    const char *query_stmt_Select;
+    AppDelegate *thisApp = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSString *querySelect = [NSString stringWithFormat:@"SELECT imagesync_datetime from imagesync"];
+    query_stmt_Select = [querySelect UTF8String];
+    if (sqlite3_prepare_v2(database, query_stmt_Select, -1, &selectStmt, NULL) == SQLITE_OK)
+    {
+        while (sqlite3_step(selectStmt) == SQLITE_ROW)
+        {
+            thisApp.imagesynctime = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,0)];
+        }
+    }
+    
+    
+    
+    
+    
+}
 -(void)sync
 {
     sqlite3_stmt *DeleteStmt;
@@ -239,7 +339,7 @@
     else
     {
         
-        NSLog(@"sync details saved");
+       // NSLog(@"sync details saved");
         
     }
     sqlite3_finalize(InsertStmt);
@@ -264,11 +364,11 @@
     NSDate *myDate =[dateFormatter dateFromString:thisApp.syncDateTime];
     
     dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mma"];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy,hh:mm a"];
     thisApp.syncDateTime = [dateFormatter stringFromDate:myDate];
     
     
-    NSLog(@"Timmeee  ::::::::::%@",thisApp.syncDateTime);
+   
 }
 //-(void)getsynctime:(NSString*)username
 //{
@@ -324,7 +424,10 @@
 -(void)updatecart:(ProductItem*)PSelectItem userid:(NSString*)username
 {
     sqlite3_stmt *updateStmt;
-    NSString *querySQLupdate = [NSString stringWithFormat:@"UPDATE cart SET cart_qty = %d where user_id = '%@' and products_id = '%@'",PSelectItem.quantity,username,PSelectItem.productcode];
+    
+     
+         
+    NSString *querySQLupdate = [NSString stringWithFormat:@"UPDATE cart SET cart_qty = %d where user_id = '%@' and products_id = '%@'",PSelectItem.StdPackDet,username,PSelectItem.productcode];
     NSLog(@"query %@",querySQLupdate);
     const char *query_stmt_update= [querySQLupdate UTF8String];
     
@@ -344,7 +447,7 @@
     sqlite3_stmt *selectStmt;
     const char *query_stmt_Select;
    thisApp.cartArray = [[NSMutableArray alloc] init];
-    NSString *querySelect = [NSString stringWithFormat:@"SELECT a.products_desc,a.products_uom,b.cart_qty,b.products_id from products_details a ,cart b WHERE a.products_id = b.products_id AND b.user_id = '%@'",username];
+    NSString *querySelect = [NSString stringWithFormat:@"SELECT a.products_desc,a.products_uom,a.products_qty,b.cart_qty,b.products_id from products_details a ,cart b WHERE a.products_id = b.products_id AND b.user_id = '%@'",username];
     query_stmt_Select = [querySelect UTF8String];
     if (sqlite3_prepare_v2(database, query_stmt_Select, -1, &selectStmt, NULL) == SQLITE_OK)
     {
@@ -353,11 +456,31 @@
             ProductItem *pitem = [[ProductItem alloc] init];
             pitem.proddescription = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,0)];
             pitem.productuom = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,1)];
-            pitem.quantity = sqlite3_column_int(selectStmt, 2);
-             pitem.productcode = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,3)];
+            pitem.StdPackDet = sqlite3_column_int(selectStmt, 2);
+            pitem.par = sqlite3_column_int(selectStmt, 3);
+             pitem.productcode = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,4)];
             [thisApp.cartArray addObject:pitem];
         }
     }
+}
+-(void)getExcelPAR:(NSString*)username pid:(NSString*)prodid
+{
+    AppDelegate *thisApp = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    sqlite3_stmt *selectStmt;
+    const char *query_stmt_Select;
+    thisApp.ExcelPAR = 0;
+    NSString *querySelect = [NSString stringWithFormat:@"SELECT par FROM PAR WHERE '%@' like  locations || '%%' AND products_id ='%@'",username,prodid];
+    NSLog(@"querrrrr:%@",querySelect);
+    query_stmt_Select = [querySelect UTF8String];
+    if (sqlite3_prepare_v2(database, query_stmt_Select, -1, &selectStmt, NULL) == SQLITE_OK)
+    {
+        while (sqlite3_step(selectStmt) == SQLITE_ROW)
+        {
+            thisApp.ExcelPAR = sqlite3_column_int(selectStmt, 0);
+            
+        }
+    }
+    NSLog(@"excelPAR:%d",thisApp.ExcelPAR);
 }
 -(void)getfav:(NSString*)username
 {
@@ -365,7 +488,7 @@
     sqlite3_stmt *selectStmt;
     const char *query_stmt_Select;
     thisApp.favArray = [[NSMutableArray alloc] init];
-    NSString *querySelect = [NSString stringWithFormat:@"SELECT a.products_desc,a.products_uom,a.products_qty,a.products_id from products_details a ,favourites b WHERE a.products_id = b.products_id AND b.user_id = '%@' ORDER BY a.products_desc ASC",username];
+    NSString *querySelect = [NSString stringWithFormat:@"SELECT a.products_desc,a.products_uom,a.products_qty,a.products_id,b.par from products_details a ,favourites b WHERE a.products_id = b.products_id AND b.user_id = '%@' ORDER BY a.products_desc ASC",username];
     query_stmt_Select = [querySelect UTF8String];
     if (sqlite3_prepare_v2(database, query_stmt_Select, -1, &selectStmt, NULL) == SQLITE_OK)
     {
@@ -374,14 +497,15 @@
             ProductItem *pitem = [[ProductItem alloc] init];
             pitem.proddescription = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,0)];
             pitem.productuom = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,1)];
-            pitem.quantity = sqlite3_column_int(selectStmt, 2);
+            pitem.StdPackDet = sqlite3_column_int(selectStmt, 2);
             pitem.productcode = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,3)];
+            pitem.par = sqlite3_column_int(selectStmt, 4);
             [thisApp.favArray addObject:pitem];
         }
     }
 }
 
--(BOOL)addToFav:(ProductItem*)PSelectItem userid:(NSString*)username
+-(BOOL)addToFav:(ProductItem*)PSelectItem userid:(NSString*)username pr:(int)par
 {
     sqlite3_stmt *selectStmt;
     const char *query_stmt_Select;
@@ -400,7 +524,7 @@
     if(!isAlready)
     {
     sqlite3_stmt *InsertStmt;
-    NSString *querySQLInsert = [NSString stringWithFormat:@"INSERT INTO favourites(products_id,user_id) VALUES(?,?)"];
+    NSString *querySQLInsert = [NSString stringWithFormat:@"INSERT INTO favourites(products_id,user_id,par) VALUES(?,?,?)"];
     const char *query_stmt_Insert= [querySQLInsert UTF8String];
     if(sqlite3_prepare_v2(database, query_stmt_Insert, -1, &InsertStmt, NULL)!= SQLITE_OK)
         NSLog(@"Error while creating add statement. '%s'", sqlite3_errmsg(database));
@@ -408,6 +532,7 @@
     {
         sqlite3_bind_text(InsertStmt, 1, [PSelectItem.productcode UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(InsertStmt, 2, [username UTF8String], -1, SQLITE_TRANSIENT);
+         sqlite3_bind_int(InsertStmt, 3, par);
         
         
     }
@@ -416,7 +541,7 @@
     else
     {
         
-        NSLog(@"fav details saved");
+       // NSLog(@"fav details saved");
         
     }
     
@@ -439,7 +564,7 @@
         {
             
             isAlready = 1;
-            NSLog(@"isAlready :%d",isAlready);
+            //NSLog(@"isAlready :%d",isAlready);
         }
     }
     if(!isAlready)
@@ -454,7 +579,11 @@
     {
         sqlite3_bind_text(InsertStmt, 1, [PSelectItem.productcode UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(InsertStmt, 2, [username UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(InsertStmt, 3, PSelectItem.quantity);
+        NSLog(@"parrrrr:%d",PSelectItem.par);
+        if(PSelectItem.par==0)
+        sqlite3_bind_int(InsertStmt, 3, PSelectItem.StdPackDet);
+        else
+          sqlite3_bind_int(InsertStmt, 3, PSelectItem.par);
        
     }
     if(SQLITE_DONE != sqlite3_step(InsertStmt))
@@ -493,7 +622,7 @@
             pitem.proddescription = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,1)];
             
             pitem.productuom =[[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,2)];
-           pitem.quantity =  sqlite3_column_int(selectStmt, 3);
+           pitem.StdPackDet =  sqlite3_column_int(selectStmt, 3);
          [thisApp.orderDetailsArray addObject:pitem];
             
         }
@@ -541,7 +670,46 @@
         NSLog(@"orderarray %@",thisApp.orderArray);
     }
 }
--(void)addOrderDetails
+-(void)addOrderDetailsFromPendingStatus//Diff bet this & addOrderDetails func is the array ..here add from orderdetails array
+{
+    AppDelegate *thisApp = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    sqlite3_stmt *InsertStmt = NULL;
+    ProductItem *pitem  = [[ProductItem alloc]init];
+    for(int i=0 ; i<thisApp.orderDetailsArray.count;i++)
+    {
+        pitem = [thisApp.orderDetailsArray objectAtIndex:i];
+        NSString *querySQLInsert = [NSString stringWithFormat:@"INSERT INTO order_details(order_id,products_id,products_desc,products_uom,products_qty) VALUES(?,?,?,?,?)"];
+        NSLog(@"querySQLInsert :%@",querySQLInsert);
+        const char *query_stmt_Insert= [querySQLInsert UTF8String];
+        if(sqlite3_prepare_v2(database, query_stmt_Insert, -1, &InsertStmt, NULL)!= SQLITE_OK)
+            NSLog(@"Error while creating add statement. '%s'", sqlite3_errmsg(database));
+        else
+        {
+            sqlite3_bind_int(InsertStmt, 1, thisApp.currentOrderId);
+            sqlite3_bind_text(InsertStmt, 2, [pitem.productcode UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(InsertStmt, 3, [pitem.proddescription UTF8String], -1, SQLITE_TRANSIENT);
+            sqlite3_bind_text(InsertStmt, 4, [pitem.productuom UTF8String], -1, SQLITE_TRANSIENT);
+            if(pitem.par==0)
+                sqlite3_bind_int(InsertStmt, 5, pitem.StdPackDet);
+            else
+                sqlite3_bind_int(InsertStmt, 5, pitem.par);
+            
+        }
+        if(SQLITE_DONE != sqlite3_step(InsertStmt))
+        {
+            NSLog(@"Error while inserting result data. '%s'", sqlite3_errmsg(database));
+        }
+        else
+        {
+            
+            NSLog(@"Order status details saved");
+            
+        }
+        
+    }
+    sqlite3_finalize(InsertStmt);
+}
+-(void)addOrderDetails//here add from cart array
 {
     AppDelegate *thisApp = (AppDelegate *)[UIApplication sharedApplication].delegate;
     sqlite3_stmt *InsertStmt = NULL;
@@ -560,7 +728,11 @@
         sqlite3_bind_text(InsertStmt, 2, [pitem.productcode UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(InsertStmt, 3, [pitem.proddescription UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(InsertStmt, 4, [pitem.productuom UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(InsertStmt, 5, pitem.quantity);
+        if(pitem.par==0)
+            sqlite3_bind_int(InsertStmt, 5, pitem.StdPackDet);
+        else
+            sqlite3_bind_int(InsertStmt, 5, pitem.par);
+        
     }
         if(SQLITE_DONE != sqlite3_step(InsertStmt))
         {
@@ -576,14 +748,48 @@
     }
     sqlite3_finalize(InsertStmt);
 }
--(void)addOrderStatus:(NSString*)username totalItm:(int)NoOfItem
+-(void)deleteOrderstatus_detailsWithStatusPending:(int)orderId
+{
+    sqlite3_stmt *DeleteStmt;
+    NSString *querySQLDelete =  @"";
+    const char *query_stmt_Delete;
+    querySQLDelete = [NSString stringWithFormat:@"delete from order_status WHERE order_id = %d",orderId];
+
+    query_stmt_Delete= [querySQLDelete UTF8String];
+    if( sqlite3_prepare_v2(database,query_stmt_Delete, -1, &DeleteStmt, NULL) == SQLITE_OK )
+    {
+        sqlite3_step(DeleteStmt);
+    }
+    else
+    {
+        NSLog( @"Failed to delete order_status from sqlite3_prepare_v2. Error is:  %s", sqlite3_errmsg(database) );
+    }
+    sqlite3_finalize(DeleteStmt);
+    sqlite3_stmt *DeleteStmt1;
+    NSString *querySQLDelete1 =  @"";
+    const char *query_stmt_Delete1;
+    querySQLDelete1 = [NSString stringWithFormat:@"delete from order_details WHERE order_id = %d",orderId];
+    
+    query_stmt_Delete1= [querySQLDelete1 UTF8String];
+    if( sqlite3_prepare_v2(database,query_stmt_Delete1, -1, &DeleteStmt1, NULL) == SQLITE_OK )
+    {
+        sqlite3_step(DeleteStmt1);
+    }
+    else
+    {
+        NSLog( @"Failed to delete order_details from sqlite3_prepare_v2. Error is:  %s", sqlite3_errmsg(database) );
+    }
+    sqlite3_finalize(DeleteStmt1);
+    
+}
+-(void)addOrderStatus:(NSString*)username totalItm:(int)NoOfItem sts:(NSString*)Status
 {
     AppDelegate *thisApp = (AppDelegate *)[UIApplication sharedApplication].delegate;
     sqlite3_stmt *InsertStmt;
     
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy hh:mma"];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy,hh:mm a"];
    
     
     
@@ -599,7 +805,7 @@
         sqlite3_bind_text(InsertStmt, 1, [username UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_int(InsertStmt, 2, NoOfItem);
         sqlite3_bind_text(InsertStmt, 3, [dateString UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_text(InsertStmt, 4, [[NSString stringWithFormat:@"Submitted"] UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(InsertStmt, 4, [Status UTF8String], -1, SQLITE_TRANSIENT);
     }
     if(SQLITE_DONE != sqlite3_step(InsertStmt))
     {
@@ -641,7 +847,7 @@
     {
         sqlite3_bind_text(InsertStmt, 1, [Proditem.productcode UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(InsertStmt, 2, [Proditem.proddescription UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(InsertStmt, 3, Proditem.quantity );
+        sqlite3_bind_int(InsertStmt, 3, Proditem.StdPackDet );
         sqlite3_bind_text(InsertStmt, 4, [Proditem.productuom UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_int(InsertStmt, 5, 0);
     }
@@ -652,7 +858,7 @@
     else
     {
        
-        NSLog(@"product details saved: %@",Proditem.productcode);
+        //NSLog(@"product details saved: %@",Proditem.productcode);
         
     }
     sqlite3_finalize(InsertStmt);
@@ -741,7 +947,7 @@
             ProductItem *pitem = [[ProductItem alloc] init];
             pitem.productcode = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,0)];
             pitem.proddescription = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,1)];
-            pitem.quantity = sqlite3_column_int(selectStmt, 2);
+            pitem.StdPackDet = sqlite3_column_int(selectStmt, 2);
             pitem.productuom = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(selectStmt,3)];
             [thisApp.prodArray addObject:pitem];
             

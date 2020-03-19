@@ -18,5 +18,7 @@
 @property NSString* dateTimeString;
 - (IBAction)backBtnPressed:(id)sender;
 - (IBAction)ReorderBtnPressed:(id)sender;
+@property (nonatomic, retain)   NSOutputStream *  networkStream;
+@property (nonatomic, retain)   NSInputStream *   fileStream;
 
 @end

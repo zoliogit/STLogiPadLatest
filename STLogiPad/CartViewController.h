@@ -27,13 +27,16 @@
     __weak IBOutlet UIButton *productsBtn;
     ProductListPopOverViewController *productListPopOverViewController;
     IBOutlet UITableView *productListTable;
+    __weak IBOutlet UILabel *NoOfItems;
     
+    __weak IBOutlet UIButton *SelectAllBtn;
     
-    
-    UIPopoverController *popoverController;
+   UIPopoverController *popoverController;
     NSMutableArray *favcartArray;
     NSMutableArray *tempArray;
     BOOL isLogout;
+     NSString *ftpFromType;
+    
 }
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 - (IBAction)productsClicked:(id)sender;
@@ -42,8 +45,10 @@
 - (IBAction)SubBtnPressed:(id)sender;
 - (IBAction)LogoutBtnPressed:(id)sender;
 - (IBAction)OrderBtnPressed:(id)sender;
+- (IBAction)SelectAllBtnPressed:(id)sender;
 
-
+@property (nonatomic, retain)   NSOutputStream *  networkStream;
+@property (nonatomic, retain)   NSInputStream *   fileStream;
 - (IBAction)FavCartBtnPressed:(id)sender;
 - (IBAction)syncBtnClicked:(id)sender;
 

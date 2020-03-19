@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+   
     [backBtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
    backBtn.showsTouchWhenHighlighted = YES;
@@ -41,16 +41,27 @@
     
     Isdelete = YES;
     appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    
+     appdelegate.isNeedAlert = NO;
     Pcode.text = [NSString stringWithFormat:@"Product Code: %@",appdelegate.SelectedpItem.productcode];
   
     uom.text = [NSString stringWithFormat:@"UOM : %@",appdelegate.SelectedpItem.productuom];
     Pdesc.text = appdelegate.SelectedpItem.proddescription;
     
-    if(appdelegate.isFromQR)
-     qtyLabel.text = [NSString stringWithFormat:@"%d", appdelegate.SelectedpItem.QRQuantity];
-    else
-    qtyLabel.text = [NSString stringWithFormat:@"%d", appdelegate.SelectedpItem.quantity];
+   
+        NSLog(@"appdelegate.SelectedpItem.StdPackDet :%d",appdelegate.SelectedpItem.StdPackDet);
+       if(appdelegate.SelectedpItem.par == 0)
+       {
+           [appdelegate.DBhandle getExcelPAR:appdelegate.userid pid:appdelegate.SelectedpItem.productcode];
+           NSLog(@"appdelegate.ExcelPAR :%d",appdelegate.ExcelPAR);
+           if(appdelegate.ExcelPAR !=0)
+               qtyLabel.text = [NSString stringWithFormat:@"%d", appdelegate.ExcelPAR];
+           
+           else
+       qtyLabel.text = [NSString stringWithFormat:@"%d", appdelegate.SelectedpItem.StdPackDet];
+       }
+       else
+           qtyLabel.text = [NSString stringWithFormat:@"%d", appdelegate.SelectedpItem.par];
+    
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString  *documentsDirectory = [paths objectAtIndex:0];
@@ -103,6 +114,7 @@
 - (IBAction)backBtnPressed:(id)sender
 {
     backBtn.selected = YES;
+    appdelegate.islogin = YES;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -115,7 +127,7 @@
     
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Product successfully deleted from cart" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
             [alert show];
-            
+            appdelegate.islogin = YES;
             [self dismissViewControllerAnimated:YES completion:nil];
     
  
@@ -123,27 +135,29 @@
 }
 - (IBAction)PlusPressed:(id)sender {
      if([qtyLabel.text integerValue] >= 0)
-        qtyLabel.text = [NSString stringWithFormat:@"%ld", [qtyLabel.text integerValue] + 1];
+        qtyLabel.text = [NSString stringWithFormat:@"%ld", [qtyLabel.text integerValue] +  appdelegate.SelectedpItem.StdPackDet];
 }
 
 - (IBAction)MinusPressed:(id)sender {
     
-    if([qtyLabel.text integerValue] == 1 && delBtn.hidden == NO)
-    {
-        Isdelete = YES;
-        UIAlertView *tmp = [[UIAlertView alloc]
-                            initWithTitle:@""
-                            message:@"Do you want to delete the product from cart"
-                            delegate:self
-                            cancelButtonTitle:@"YES"
-                            otherButtonTitles:@"NO", nil];
-        [tmp show];
-    }
-    else
-    {
-    if([qtyLabel.text integerValue] >1)
-        qtyLabel.text = [NSString stringWithFormat:@"%ld", [qtyLabel.text integerValue] - 1];
-    }
+//    if([qtyLabel.text integerValue] == 0 && delBtn.hidden == NO)
+//    {
+//        Isdelete = YES;
+//        UIAlertView *tmp = [[UIAlertView alloc]
+//                            initWithTitle:@""
+//                            message:@"Do you want to delete the product from cart"
+//                            delegate:self
+//                            cancelButtonTitle:@"YES"
+//                            otherButtonTitles:@"NO", nil];
+//        [tmp show];
+//    }
+//    else
+//    {
+    
+    if([qtyLabel.text integerValue] >appdelegate.SelectedpItem.StdPackDet)
+
+        qtyLabel.text = [NSString stringWithFormat:@"%d", [qtyLabel.text integerValue] -  appdelegate.SelectedpItem.StdPackDet];
+    
 }
 
 - (IBAction)AddToCartPressed:(id)sender {
@@ -151,7 +165,7 @@
      addBtn.selected = YES;
     Isdelete = NO;
     
-    appdelegate.SelectedpItem.quantity =[qtyLabel.text intValue];
+    appdelegate.SelectedpItem.StdPackDet =[qtyLabel.text intValue];
     
     UIButton *someButton = (UIButton*)sender;
     NSString * strButtonTitle = [someButton titleForState:UIControlStateSelected];
@@ -171,6 +185,7 @@
         [alert show];
        }
     }
+    appdelegate.islogin = YES;
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
@@ -187,7 +202,7 @@
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Product successfully deleted from cart" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
             [alert show];
-            
+            appdelegate.islogin = YES;
             [self dismissViewControllerAnimated:YES completion:nil];
     }
     }
@@ -197,8 +212,11 @@
     
      favbtn.selected = YES;
     Isdelete = NO;
-    appdelegate.SelectedpItem.quantity = [qtyLabel.text intValue];
-    BOOL isAlready =[appdelegate.DBhandle addToFav:appdelegate.SelectedpItem userid:appdelegate.userid];
+    appdelegate.SelectedpItem.StdPackDet = [qtyLabel.text intValue];
+    
+    BOOL isAlready =[appdelegate.DBhandle addToFav:appdelegate.SelectedpItem userid:appdelegate.userid pr:[qtyLabel.text intValue]];
+
+
     if(isAlready)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Product is already in Favourites" message:@"" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];

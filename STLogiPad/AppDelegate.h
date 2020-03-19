@@ -10,25 +10,27 @@
 #import "DBHandler.h"
 #import "ProductItem.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,NSFileManagerDelegate>
 {
     DBHandler *DBhandle;
+    
+    UIActivityIndicatorView *spinner ;
 }
 
 @property DBHandler *DBhandle;
 @property (strong, nonatomic) UIWindow *window;
-@property NSString *SelProdCode, *userid, *syncDateTime, *warehousecode, *emailaddr, *ccaddr;
+@property NSString *SelProdCode, *userid, *syncDateTime, *warehousecode, *emailaddr, *ccaddr, *ownerCode,*selectedOrderStatus, *imagesynctime;
 @property NSMutableArray *prodArray;
 @property NSMutableArray *cartArray;
 @property NSMutableArray *favArray;
 @property ProductItem *SelectedpItem;
-@property int currentOrderId;
+@property int currentOrderId,ExcelPAR,SelectedOrderid;
 @property NSMutableArray *orderArray, *orderDetailsArray, *SyncprodArray;
-@property BOOL islogin,isFromQR;
+@property BOOL islogin,isFromQR,isNeedAlert;
 @property (nonatomic, retain) NSMutableArray *customerArray;
 
 -(void)getcustProducts;
-
+-(void)getCSV;
 
 @end
 

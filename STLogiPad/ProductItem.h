@@ -11,11 +11,11 @@
 @interface ProductItem : NSObject
 @property NSString *ownercode;
 @property NSString *warehousecode;
-@property NSString *StdPackDet;
+@property int StdPackDet;
 @property NSString *productcode;
 @property NSString *proddescription;
 @property NSString *productuom;
-@property int quantity,QRQuantity;
+@property int Totalquantity,par,isSelected;
 @property NSString* image;
 
 @end

@@ -9,6 +9,6 @@
 #import "ProductItem.h"
 
 @implementation ProductItem
-@synthesize productuom,productcode,proddescription,quantity,image,ownercode,warehousecode,StdPackDet,QRQuantity;
+@synthesize productuom,productcode,proddescription,Totalquantity,image,ownercode,warehousecode,StdPackDet,par,isSelected;
 
 @end

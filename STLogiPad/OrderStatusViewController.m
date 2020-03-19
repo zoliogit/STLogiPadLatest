@@ -22,6 +22,7 @@
 @implementation OrderStatusViewController
 
 - (void)viewDidLoad {
+   
     [super viewDidLoad];
     [backbtn setBackgroundImage:[UIImage imageNamed:@"buttonImage.png"] forState:UIControlStateNormal];
     
@@ -29,7 +30,10 @@
     
     appdelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appdelegate.DBhandle getOrderstatus:appdelegate.userid];
-    NSLog(@"app:%@",appdelegate.orderArray);
+   
+     appdelegate.isNeedAlert = NO;
+     appdelegate.orderArray =  [NSMutableArray arrayWithArray:[[appdelegate.orderArray reverseObjectEnumerator] allObjects]];
+    // NSLog(@"app:%@",appdelegate.orderArray);
     
 //    NSMutableDictionary *ordDict1 = [[NSMutableDictionary alloc]init];
 //    NSMutableDictionary *ordDict2 = [[NSMutableDictionary alloc]init];
@@ -77,14 +81,20 @@
     cell.SlNo.text = [NSString stringWithFormat:@"%d", indexPath.row + 1];
     
     NSString *dateTime = [dict objectForKey:@"date"];
-    NSArray *seperateString = [dateTime componentsSeparatedByString:@" "];
+    
+    NSArray *seperateString = [dateTime componentsSeparatedByString:@","];
    
     //NSArray *seperateTimeString = [seperateString[1] componentsSeparatedByString:@":"];
     cell.Date.text =  seperateString[0];
     cell.time.text = [NSString stringWithFormat:@"%@",seperateString[1]];
     cell.NoOfItems.text = [dict objectForKey:@"itemcount"];
     cell.Status.text = [dict objectForKey:@"status"];
-   
+    if([[dict objectForKey:@"status"] isEqualToString:@"Pending"])
+    {
+        cell.Status.textColor = [UIColor redColor];
+        
+    }
+    
     
     return cell;
     }
@@ -92,10 +102,12 @@
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     dict = [appdelegate.orderArray objectAtIndex:indexPath.row];
-    [appdelegate.DBhandle getOrderdetails:[[dict objectForKey:@"orderid"] integerValue]];
+    [appdelegate.DBhandle getOrderdetails:[[dict objectForKey:@"orderid"] intValue]];
+    appdelegate.SelectedOrderid = [[dict objectForKey:@"orderid"] intValue];
+    appdelegate.selectedOrderStatus = [dict objectForKey:@"status"];
     orderDetailsViewController *odv = [self.storyboard instantiateViewControllerWithIdentifier:@"orderDetailsViewController"];
     NSString *dateTime = [dict objectForKey:@"date"];
-    NSArray *seperateString = [dateTime componentsSeparatedByString:@" "];
+    NSArray *seperateString = [dateTime componentsSeparatedByString:@","];
     odv.dateTimeString =[NSString stringWithFormat:@"%@ %@",seperateString[0],seperateString[1]];
     [self presentViewController:odv animated:YES completion:nil];
 }
@@ -117,7 +129,7 @@
 - (IBAction)BackBtnPressed:(id)sender {
     
     backbtn.selected = YES;
-    
+    appdelegate.islogin = YES;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end
