@@ -29,8 +29,8 @@
 @property BOOL islogin,isFromQR,isNeedAlert;
 @property (nonatomic, retain) NSMutableArray *customerArray;
 
--(void)getcustProducts;
--(void)getCSV;
+//-(void)getcustProducts;
+//-(void)getCSV;
 
 @end
 

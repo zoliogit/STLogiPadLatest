@@ -19,7 +19,7 @@ enum {
     kSendBufferSize = 32768
 };
 
-#define BuildNo @"200205"//@"200106"//@"20191129"
+#define BuildNo @"200326" //@"200323"     //@"200205"//@"200106"//@"20191129"
 
 @interface ViewController ()<NSStreamDelegate>
 {
@@ -296,7 +296,11 @@ didCompleteWithError:(nullable NSError *)error
     NSLog(@"errors %@",error.debugDescription);
     if(error != NULL )
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Server Problem" message:error.debugDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [spinner stopAnimating];
+        UIView *view=[self.view viewWithTag:8887];
+        [view removeFromSuperview];
+
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Server Problem....Please try after sometime" message:error.debugDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
 }
