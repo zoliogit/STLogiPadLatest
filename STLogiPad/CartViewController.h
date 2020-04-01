@@ -11,7 +11,7 @@
 #import <MessageUI/MessageUI.h>
 #import "ZBarSDK.h"
 
-@interface CartViewController : UIViewController<UIPopoverControllerDelegate,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,MFMailComposeViewControllerDelegate,ZBarReaderDelegate,UISearchBarDelegate>
+@interface CartViewController : UIViewController<UIPopoverControllerDelegate,UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,MFMailComposeViewControllerDelegate,ZBarReaderDelegate,UISearchResultsUpdating>
 {
     
     __weak IBOutlet UIButton *orderBtn;
@@ -38,7 +38,7 @@
      NSString *ftpFromType;
     
 }
-@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+
 - (IBAction)productsClicked:(id)sender;
 - (IBAction)ScnBtnClicked:(id)sender;
 - (IBAction)FavbtnClicked:(id)sender;
@@ -49,6 +49,7 @@
 
 @property (nonatomic, retain)   NSOutputStream *  networkStream;
 @property (nonatomic, retain)   NSInputStream *   fileStream;
+@property(nonatomic, strong) IBOutlet UISearchController *searchController;
 - (IBAction)FavCartBtnPressed:(id)sender;
 - (IBAction)syncBtnClicked:(id)sender;
 
